@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilar 12: Legado do Cuidado - Amparo HAZAQ</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1b2a">
+<style>
+:root {
+--primary-color: #0b1c3d;
+--secondary-color: #1b263b;
+--accent-color: #415a77;
+--text-color: #1f2937;
+--light-bg: #f8fafc;
+--border-color: #cbd5e1;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+margin: 0;
+padding: 0;
+background-color: var(--light-bg);
+color: var(--text-color);
+line-height: 1.8;
+}
+
+header {
+background-color: var(--primary-color);
+color: white;
+text-align: center;
+padding: 30px 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logo-container {
+max-width: 240px;
+margin: 0 auto 15px auto;
+cursor: pointer; /* Indica que é clicável para abrir o modal */
+}
+
+.logo-container img {
+width: 100%;
+height: auto;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+h1 {
+font-size: 1.6rem;
+margin: 10px 0 5px 0;
+letter-spacing: 0.5px;
+}
+
+p.subtitle {
+font-size: 1rem;
+color: #cbd5e1;
+margin: 0;
+}
+
+.container {
+max-width: 950px;
+margin: 40px auto;
+padding: 50px;
+background: white;
+border-radius: 10px;
+box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+border: 1px solid #e2e8f0;
+}
+
+h2 {
+color: var(--primary-color);
+border-bottom: 3px solid var(--primary-color);
+padding-bottom: 10px;
+margin-top: 45px;
+font-size: 1.4rem;
+}
+
+p, ul, ol {
+margin-bottom: 20px;
+text-align: justify;
+font-size: 1.05rem;
+}
+
+ul, ol {
+padding-left: 30px;
+}
+
+li {
+margin-bottom: 12px;
+}
+
+blockquote {
+background-color: #f1f5f9;
+border-left: 5px solid var(--primary-color);
+margin: 25px 0;
+padding: 20px 25px;
+font-style: italic;
+color: #334155;
+border-radius: 4px;
+}
+
+blockquote cite {
+display: block;
+margin-top: 10px;
+font-style: normal;
+font-weight: 600;
+color: var(--primary-color);
+font-size: 0.95rem;
+}
+
+.box-destaque {
+background-color: #f1f5f9;
+border-left: 6px solid var(--primary-color);
+padding: 25px;
+margin: 30px 0;
+border-radius: 6px;
+border: 1px solid #e2e8f0;
+}
+
+.box-destaque strong {
+color: var(--primary-color);
+display: block;
+margin-bottom: 12px;
+font-size: 1.1rem;
+}
+
+.back-link {
+display: inline-block;
+margin-top: 40px;
+text-decoration: none;
+color: white;
+background-color: var(--primary-color);
+padding: 14px 28px;
+border-radius: 6px;
+font-weight: 600;
+transition: background 0.2s, transform 0.1s;
+}
+
+.back-link:hover {
+background-color: var(--accent-color);
+transform: translateY(-1px);
+}
+
+footer {
+text-align: center;
+padding: 30px;
+font-size: 0.9rem;
+color: #64748b;
+margin-top: 60px;
+border-top: 1px solid var(--border-color);
+}
+
+/* Estilização do Modal */
+.modal {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+overflow: auto;
+background-color: rgba(0,0,0,0.6);
+backdrop-filter: blur(3px);
+}
+
+.modal-content {
+background-color: #fefefe;
+margin: 10% auto;
+padding: 40px;
+border: 1px solid #888;
+width: 80%;
+max-width: 700px;
+border-radius: 12px;
+box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+position: relative;
+animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+from {transform: translateY(-50px); opacity: 0;}
+to {transform: translateY(0); opacity: 1;}
+}
+
+.close-modal {
+color: #aaa;
+float: right;
+font-size: 28px;
+font-weight: bold;
+position: absolute;
+top: 15px;
+right: 25px;
+cursor: pointer;
+transition: color 0.2s;
+}
+
+.close-modal:hover,
+.close-modal:focus {
+color: #0b1c3d;
+text-decoration: none;
+cursor: pointer;
+}
+
+.modal-title {
+color: #0b1c3d;
+border-bottom: 2px solid #0b1c3d;
+padding-bottom: 15px;
+margin-bottom: 25px;
+font-size: 1.5rem;
+font-weight: 700;
+}
+
+.modal-body p {
+margin-bottom: 15px;
+text-align: left;
+font-size: 1.1rem;
+line-height: 1.6;
+}
+
+.modal-body strong {
+color: #0b1c3d;
+font-weight: 600;
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo-container" id="openModalBtn">
+<img src="img12.png" alt="Legado do Cuidado">
+</div>
+<h1>Amparo HAZAQ</h1>
+<p class="subtitle">Pilar 12: Legado do Cuidado</p>
+</header>
+
+<div class="container">
+<h2>1. O Tratamento Clínico e Espiritual de Excelência</h2>
+<p>Chegados ao último pilar, a abordagem deve ser incisiva e clínica: a recuperação real não aceita paliativos ou métodos baseados apenas na força de vontade humana. O "melhor" tratamento é aquele que integra a rigorosa gestão comportamental e emocional com a libertação espiritual absoluta, reconhecendo o homem como um ser biopsicossocial e pneumático. O Amparo HAZAQ não oferece apenas sobriedade, mas a fundação para uma vida nova, alinhada com a Verdade e capacitada pelo Espírito Santo. Negligenciar qualquer uma dessas esferas é garantir a reincidência.</p>
+
+<blockquote>
+"A verdadeira cura não ocorre apenas pela cessação do sintoma, mas pela reestruturação do caráter e a submissão total da vontade àquele que é o autor da vida e da liberdade."
+<cite>— Relato Clínico-Teológico</cite>
+</blockquote>
+
+<p>A Sagrada Escritura ratifica que a transformação integral é a única resposta eficaz para a condição humana caída:</p>
+
+<div class="box-destaque">
+<strong>Fundamentação Bíblica:</strong>
+<p><em>"E conhecereis a verdade, e a verdade vos libertará."</em> (João 8:32)</p>
+<p><em>"Se, pois, o Filho vos libertar, verdadeiramente sereis livres."</em> (João 8:36)</p>
+</div>
+
+<h2>2. A Expansão do Cuidado: Estendendo a Mão à Libertação</h2>
+<p>A sobriedade e a restauração não podem ser guardadas como um tesouro egoísta. O homem que foi curado tem o dever moral e espiritual de estender a mão, compartilhar o método e ajudar ativamente outros que ainda lutam nas trevas da adicção e das instabilidades sociais. O verdadeiro legado não é o que você acumulou de conhecimento para si, mas quantos você ajudou a erguer do precipício, tornando-se um instrumento de Deus para a libertação de outros lares.</p>
+
+<blockquote>
+"A maior honra que um homem pode receber não é ser servido, mas servir e resgatar os seus semelhantes da escravidão do vício e do desespero."
+<cite>— Enéas Carneiro</cite>
+</blockquote>
+
+<p>Exemplos práticos de como estender o cuidado no dia a dia:</p>
+<ul>
+<li><strong>Mentoria Ativa:</strong> Acompanhar de perto, com paciência e firmeza, um recém-chegado na jornada de reabilitação, compartilhando sua própria experiência e os pilares de sustentação.</li>
+<li><strong>Serviço Comunitário:</strong> Participar de grupos de apoio, atuar em ministérios de recuperação ou oferecer suporte prático (como auxílio social ou espiritual) a famílias que enfrentam a mesma batalha.</li>
+<li><strong>Emissário da Verdade:</strong> Utilizar sua história de transformação — sem se vangloriar, mas glorificando a Deus — para evangelizar e dar testemunho de que a recuperação completa é possível e acessível.</li>
+<li><strong>Vigilância Coletiva:</strong> Proteger ativamente o ambiente restaurado, evitando comportamentos ou companhias que possam colocar em risco sua sobriedade ou a de outros irmãos na fé.</li>
+</ul>
+
+<h2>3. A Consagração do Legado</h2>
+<p>O Pilar do Legado do Cuidado sela o compromisso de que a sua batalha não foi em vain, mas serviu como preparação para uma vida de impacto e serviço. A restauração completa da sua saúde física, mental e espiritual — com a ajuda do Parakletos — transforma você em um farol de esperança e uma ferramenta viva da justiça de Deus na terra.</p>
+
+<div class="box-destaque">
+<strong>Diretriz Prática de Execução:</strong>
+<p><em>"Irmãos, se algum homem chegar a ser surpreendido nalguma ofensa, vós, que sois espirituais, encaminhai o tal com espírito de mansidão; olhando por ti mesmo, para que não seas também tentado. Levai as cargas uns dos outros, e assim cumprirei a lei de Cristo."</em> (Gálatas 6:1-2)</p>
+</div>
+
+<p>A estrutura foi entregue. O conhecimento foi passado. O método foi validado. O legado do cuidado depende agora da sua decisão irrevogável de viver em santidade, servir ao próximo e glorificar ao Criador todos os dias da sua vida.</p>
+
+<a href="index.html" class="back-link">← Voltar ao Menu Principal</a>
+</div>
+
+<footer>
+<p>© 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
+</footer>
+
+<!-- Estrutura do Modal -->
+<div id="infoModal" class="modal">
+<div class="modal-content">
+<span class="close-modal">×</span>
+<div class="modal-title">Sobre o Amparo HAZAQ e Gilberto Moreira</div>
+<div class="modal-body">
+<p><strong>O Amparo HAZAQ</strong> foi criado como um Programa de Desenvolvimento Pessoal para ajudar pessoas não apenas com vícios químicos e não químicos, mas com outras instabilidades emocionais e vulnerabilidades sociais, oferecendo um caminho de restauração integral (física, mental e espiritual).</p>
+<p><strong>Gilberto Moreira</strong>, Pastor Credenciado na CGADB - Convenção Geral das AD no Brasil (matrícula 65.099), possui vasto conhecimento em gestão Emocional e Espiritual.</p>
+<p>Atua como <strong>psicoterapeuta</strong> (CBO 2515-50) com mais de 20 anos de experiência nas áreas de auxílio e recuperação de dependentes. É também <strong>teólogo</strong> e desenvolvedor de vários aplicativos voltados para o bem-estar, o desenvolvimento humano e a gestão de crises e recuperação.</p>
+</div>
+</div>
+</div>
+
+<!-- Script para o Modal -->
+<script>
+// Obter elementos do modal
+var modal = document.getElementById("infoModal");
+var logoBtn = document.getElementById("openModalBtn"); // Clicar na logo agora abre o modal
+var span = document.getElementsByClassName("close-modal")[0];
+
+// Função para abrir o modal
+logoBtn.onclick = function() {
+modal.style.display = "block";
+}
+
+// Função para fechar o modal ao clicar no X
+span.onclick = function() {
+modal.style.display = "none";
+}
+
+// Função para fechar o modal ao clicar fora dele
+window.onclick = function(event) {
+if (event.target == modal) {
+modal.style.display = "none";
+}
+}
+
+// Prevenir comportamento padrão de link se a logo estiver dentro de um link
+if(logoBtn.tagName === 'A') {
+logoBtn.addEventListener('click', function(e) {
+e.preventDefault();
+});
+}
+</script>
+
+</body>
+</html>
