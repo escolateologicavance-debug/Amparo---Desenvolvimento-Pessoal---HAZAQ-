@@ -1,7 +1,7 @@
-const CACHE_NAME = 'hazaq-cache-v1';
+const CACHE_NAME = 'hazaq-cache-v2';
 const urlsToCache = [
 'index.html',
-'1000362017.png',
+'logo-192.png',
 'manifest.json'
 ];
 
