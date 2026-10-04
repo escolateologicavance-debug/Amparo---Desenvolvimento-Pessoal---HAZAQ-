@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pilar 10: Autoquestionário da Libertação - Amparo HAZAQ</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1b2a">
+<style>
+:root {
+--primary-color: #0b1c3d;
+--secondary-color: #1b263b;
+--accent-color: #415a77;
+--text-color: #1f2937;
+--light-bg: #f8fafc;
+--border-color: #cbd5e1;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+margin: 0;
+padding: 0;
+background-color: var(--light-bg);
+color: var(--text-color);
+line-height: 1.8;
+}
+
+header {
+background-color: var(--primary-color);
+color: white;
+text-align: center;
+padding: 30px 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logo-container {
+max-width: 240px;
+margin: 0 auto 15px auto;
+}
+
+.logo-container img {
+width: 100%;
+height: auto;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+h1 {
+font-size: 1.6rem;
+margin: 10px 0 5px 0;
+letter-spacing: 0.5px;
+}
+
+p.subtitle {
+font-size: 1rem;
+color: #cbd5e1;
+margin: 0;
+}
+
+.container {
+max-width: 950px;
+margin: 40px auto;
+padding: 50px;
+background: white;
+border-radius: 10px;
+box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+border: 1px solid #e2e8f0;
+}
+
+h2 {
+color: var(--primary-color);
+border-bottom: 3px solid var(--primary-color);
+padding-bottom: 10px;
+margin-top: 45px;
+font-size: 1.4rem;
+}
+
+p, ul, ol {
+margin-bottom: 20px;
+text-align: justify;
+font-size: 1.05rem;
+}
+
+blockquote {
+background-color: #f1f5f9;
+border-left: 5px solid var(--primary-color);
+margin: 25px 0;
+padding: 20px 25px;
+font-style: italic;
+color: #334155;
+border-radius: 4px;
+}
+
+blockquote cite {
+display: block;
+margin-top: 10px;
+font-style: normal;
+font-weight: 600;
+color: var(--primary-color);
+font-size: 0.95rem;
+}
+
+.box-destaque {
+background-color: #f1f5f9;
+border-left: 6px solid var(--primary-color);
+padding: 25px;
+margin: 30px 0;
+border-radius: 6px;
+border: 1px solid #e2e8f0;
+}
+
+.box-destaque strong {
+color: var(--primary-color);
+display: block;
+margin-bottom: 12px;
+font-size: 1.1rem;
+}
+
+/* Estilização da Dinâmica Interativa */
+.questionnaire-box {
+background: #ffffff;
+border: 2px solid var(--primary-color);
+border-radius: 8px;
+padding: 30px;
+margin: 35px 0;
+box-shadow: 0 4px 12px rgba(11,28,61,0.08);
+}
+
+.question-item {
+margin-bottom: 25px;
+padding-bottom: 20px;
+border-bottom: 1px dashed var(--border-color);
+}
+
+.question-item:last-child {
+border-bottom: none;
+margin-bottom: 0;
+padding-bottom: 0;
+}
+
+.question-label {
+display: block;
+font-weight: 600;
+color: var(--primary-color);
+margin-bottom: 10px;
+font-size: 1.02rem;
+text-align: left;
+}
+
+.question-input {
+width: 100%;
+padding: 12px 15px;
+border: 1px solid var(--border-color);
+border-radius: 6px;
+font-size: 1rem;
+font-family: inherit;
+background-color: #f8fafc;
+box-sizing: border-box;
+transition: border-color 0.2s, background-color 0.2s;
+}
+
+.question-input:focus {
+outline: none;
+border-color: var(--primary-color);
+background-color: #fff;
+box-shadow: 0 0 0 3px rgba(11,28,61,0.1);
+}
+
+.action-buttons {
+display: flex;
+gap: 15px;
+margin-top: 30px;
+flex-wrap: wrap;
+}
+
+.btn-action {
+background-color: var(--primary-color);
+color: white;
+border: none;
+padding: 12px 24px;
+border-radius: 6px;
+font-weight: 600;
+font-size: 1rem;
+cursor: pointer;
+transition: background 0.2s, transform 0.1s;
+}
+
+.btn-action:hover {
+background-color: var(--accent-color);
+transform: translateY(-1px);
+}
+
+.back-link {
+display: inline-block;
+margin-top: 40px;
+text-decoration: none;
+color: white;
+background-color: var(--primary-color);
+padding: 14px 28px;
+border-radius: 6px;
+font-weight: 600;
+transition: background 0.2s, transform 0.1s;
+}
+
+.back-link:hover {
+background-color: var(--accent-color);
+transform: translateY(-1px);
+}
+
+footer {
+text-align: center;
+padding: 30px;
+font-size: 0.9rem;
+color: #64748b;
+margin-top: 60px;
+border-top: 1px solid var(--border-color);
+}
+
+@media print {
+body { background: white; color: black; }
+header, .action-buttons, .back-link, footer { display: none; }
+.container { box-shadow: none; border: none; padding: 0; max-width: 100%; }
+.questionnaire-box { border: 1px solid #000; box-shadow: none; }
+.question-input { border-bottom: 1px solid #000; background: transparent; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo-container">
+<img src="img5.png" alt="Autoquestionário da Libertação">
+</div>
+<h1>Amparo HAZAQ</h1>
+<p class="subtitle">Pilar 10: Autoquestionário da Libertação</p>
+</header>
+
+<div class="container">
+<h2>1. A Ruptura com as Raízes Ocultas do Trauma e da Injustiça</h2>
+<p>O vício não surge no vácuo; ele é, na imensa maioria das vezes, a cicatriz visível de feridas profundas cravadas na infância e na juventude. Injustiças domésticas, abusos morais, agressões físicas e o luto infantil não resolvido transformam-se em bombas relógio emocionais. Quando o indivíduo não dispõe de ferramentas morais e espirituais na aurora da vida, o cérebro recorre ao entorpecimento químico, à compulsão e ao isolamento como refúgios inconscientes para anestesiar a dor da rejeição e da revolta.</p>
+
+<blockquote>
+"As feridas infligidas na infância sem o devido confronto e reparação tornam-se prisões invisíveis, onde o adulto tenta se esconder por meio do vício e da fuga sistemática."
+<cite>— Albert Einstein (Princípios de Análise Comportamental)</cite>
+</blockquote>
+
+<p>A Sagrada Escritura aponta para a necessidade urgente de examinar o passado, expor as trevas e buscar a cura das raízes que travam o desenvolvimento do homem:</p>
+
+<div class="box-destaque">
+<strong>Fundamentação Bíblica:</strong>
+<p><em>"Curou os quebrantados de coração, e lhes ligou as feridas."</em> (Salmos 147:3)</p>
+<p><em>"Porque não há coisa oculta que não haja de manifestar-se, nem coberta que não haja de saber-se e vir à luz."</em> (Lucas 8:17)</p>
+</div>
+
+<h2>2. A Desconstrução do Esconderijo Inconsciente</h2>
+<p>Enquanto o homem mantiver escondidas as marcas de abusos e injustiças sofridas na aurora da existência, continuará usando a adicção como muleta e desabado emocional. O tratamento clínico e psicobíblico exige coragem cirúrgica para encarar o passado face a face, arrancando do inconsciente as justificativas falsas que alimentam a dependência.</p>
+
+<blockquote>
+"Um povo — ou um indivíduo — que desconhece ou oculta as verdadeiras causas de sua ruína está condenado a repetir o ciclo da escravidão."
+<cite>— Enéas Carneiro</cite>
+</blockquote>
+
+<p>A lucidez estratégica de grandes líderes históricos reforça que enfrentar o âmago do problema é o único caminho para a soberania:</p>
+
+<blockquote>
+"A coragem não é a ausência do medo ou da dor do passado, mas o triunfo definitivo sobre eles através da ação consciente."
+<cite>— Nelson Mandela</cite>
+</blockquote>
+
+<h2>3. Dinâmica Prática: Autoquestionário da Libertação</h2>
+<p>Preencha os campos abaixo com total franqueza clínica. Este mapeamento direto expõe o refúgio inconsciente onde o vício se abrigou, permitindo a neutralização definitiva dos gatilhos traumáticos de sua história.</p>
+
+<div class="questionnaire-box">
+<form id="liberationForm">
+
+<div class="question-item">
+<label class="question-label" for="q1">1. Qual foi a primeira grande injustiça ou agressão moral sofrida em sua infância que marcou sua visão de segurança?</label>
+<input type="text" id="q1" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q2">2. Houve episódios de violência física ou punições desproporcionais no ambiente familiar que geraram revolta reprimida?</label>
+<input type="text" id="q2" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q3">3. De que maneira a ausência, omissão ou hostilidade das figuras de autoridade parentais moldou sua autoconfiança?</label>
+<input type="text" id="q3" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q4">4. Qual luto infantil, perda ou abandono precoce deixou um vazio emocional que você tentou preencher mais tarde?</label>
+<input type="text" id="q4" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q5">5. Em que momento exato da sua adolescência ou juventude você encontrou no vício o seu primeiro 'esconderijo' contra a dor?</label>
+<input type="text" id="q5" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q6">6. Quais sentimentos de humilhação ou desvalia você guardou em segredo durante os anos de formação?</label>
+<input type="text" id="q6" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q7">7. Qual exigência descabida ou cobrança abusiva pesou sobre seus ombros antes do tempo adequado?</label>
+<input type="text" id="q7" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q8">8. De que forma o sentimento de injustiça sofrida serviu de desculpa inconsciente para os seus primeiros desregramentos?</label>
+<input type="text" id="q8" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q9">9. Quais palavras duras ou maldições verbais lançadas contra você na infância ainda ecoam em sua mente?</label>
+<input type="text" id="q9" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q10">10. Qual ambiente ou situação do seu passado você continua visitando mentalmente para justificar suas quedas atuais?</label>
+<input type="text" id="q10" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q11">11. Em quais momentos de solidão juvenil você buscou refúgio na fuga compulsiva para anestesiar o desespero?</label>
+<input type="text" id="q11" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q12">12. Qual figura do seu passado familiar ou social você ainda carrega consigo como um peso de ressentimento não perdoado?</label>
+<input type="text" id="q12" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q13">13. De que maneira a falta de proteção e amparo na infância gerou em você uma autossuficiência destrutiva?</label>
+<input type="text" id="q13" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q14">14. Quais expectativas frustradas dos seus pais ou responsáveis você internalizou como culpa própria?</label>
+<input type="text" id="q14" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q15">15. Qual dor oculta você tentou silenciar através de comportamentos de risco e busca por dopamina barata?</label>
+<input type="text" id="q15" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q16">16. Em que áreas da sua vida adulta você percebe que ainda reage como a criança ferida e acuada do passado?</label>
+<input type="text" id="q16" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q17">17. Qual desculpa baseada em traumas antigos você está disposto a enterrar hoje para assumir total responsabilidade pelo presente?</label>
+<input type="text" id="q17" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q18">18. O que significa, na prática, cortar o poder dessas memórias sobre o seu comportamento atual de sobriedade?</label>
+<input type="text" id="q18" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q19">19. Quais barreiras de proteção e disciplina você vai erguer para impedir que o passado volte a ditar suas decisões?</label>
+<input type="text" id="q19" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+<div class="question-item">
+<label class="question-label" for="q20">20. Qual é a sua declaração definitiva de ruptura com o ciclo de fuga e o compromisso irrevogável com a sua reabilitação?</label>
+<input type="text" id="q20" class="question-input" placeholder="Digite sua resposta aqui...">
+</div>
+
+</form>
+
+<div class="action-buttons">
+<button type="button" class="btn-action" onclick="window.print()">Imprimir em PDF / Salvar</button>
+</div>
+</div>
+
+<h2>4. A Reconciliação com a Razão e o Futuro</h2>
+<p>O Autoquestionário da Libertação encerra o ciclo de desculpas fundadas em traumas antigos. A reconciliação verdadeira não apaga o passado, mas retira dele o poder de governar o seu presente. O homem lúcido assume o controle de sua história.</p>
+
+<div class="box-destaque">
+<strong>Diretriz Prática de Execução:</strong>
+<p><em>"Irmãos, quanto a mim, não julgo que o tenha já alcançado; mas uma coisa faço, e é que, esquecendo-me das coisas que atrás ficam, e avanço para as que estão diante, pressiono em direção ao alvo."</em> (Filipenses 3:13-14)</p>
+</div>
+
+<p>A estrutura terapêutica e psicobíblica foi entregue. A resolução das marcas do passado e a aplicação implacável da disciplina dependem unicamente da sua decisão soberana.</p>
+
+<a href="index.html" class="back-link">← Voltar ao Menu Principal</a>
+</div>
+
+<footer>
+<p>© 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>
