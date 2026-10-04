@@ -36,7 +36,6 @@ box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 .logo-container {
 max-width: 240px;
 margin: 0 auto 15px auto;
-cursor: pointer; /* Indica que é clicável para abrir o modal */
 }
 
 .logo-container img {
@@ -125,9 +124,37 @@ margin-bottom: 12px;
 font-size: 1.1rem;
 }
 
+/* Estilização do Botão Visível ao Final do Conteúdo */
+.action-container {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    padding: 25px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+.btn-open-modal {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1.05rem;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(11,28,61,0.2);
+    transition: background 0.2s, transform 0.1s;
+}
+
+.btn-open-modal:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
 .back-link {
 display: inline-block;
-margin-top: 40px;
+margin-top: 20px;
 text-decoration: none;
 color: white;
 background-color: var(--primary-color);
@@ -227,8 +254,8 @@ font-weight: 600;
 <body>
 
 <header>
-<div class="logo-container" id="openModalBtn">
-<img src="img7.png" alt="Legado do Cuidado">
+<div class="logo-container">
+<img src="img12.png" alt="Legado do Cuidado">
 </div>
 <h1>Amparo HAZAQ</h1>
 <p class="subtitle">Pilar 12: Legado do Cuidado</p>
@@ -268,7 +295,7 @@ font-weight: 600;
 </ul>
 
 <h2>3. A Consagração do Legado</h2>
-<p>O Pilar do Legado do Cuidado sela o compromisso de que a sua batalha não foi em vain, mas serviu como preparação para uma vida de impacto e serviço. A restauração completa da sua saúde física, mental e espiritual — com a ajuda do Parakletos — transforma você em um farol de esperança e uma ferramenta viva da justiça de Deus na terra.</p>
+<p>O Pilar do Legado do Cuidado sela o compromisso de que a sua batalha não foi em vão, mas serviu como preparação para uma vida de impacto e serviço. A restauração completa da sua saúde física, mental e espiritual — com a ajuda do Parakletos — transforma você em um farol de esperança e uma ferramenta viva da justiça de Deus na terra.</p>
 
 <div class="box-destaque">
 <strong>Diretriz Prática de Execução:</strong>
@@ -277,17 +304,25 @@ font-weight: 600;
 
 <p>A estrutura foi entregue. O conhecimento foi passado. O método foi validado. O legado do cuidado depende agora da sua decisão irrevogável de viver em santidade, servir ao próximo e glorificar ao Criador todos os dias da sua vida.</p>
 
+<!-- BOTÃO VISÍVEL NO FINAL DO CONTEÚDO PARA ABRIR O MODAL -->
+<div class="action-container">
+    <button id="openModalBtn" class="btn-open-modal">📋 Ver Histórico, Credenciais e Sobre o Programa</button>
+</div>
+
+<div>
 <a href="index.html" class="back-link">← Voltar ao Menu Principal</a>
+</div>
+
 </div>
 
 <footer>
 <p>© 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
 </footer>
 
-<!-- Estrutura do Modal -->
+<!-- Estrutura do Modal (Posicionada ao Final) -->
 <div id="infoModal" class="modal">
 <div class="modal-content">
-<span class="close-modal">×</span>
+<span class="close-modal">&times;</span>
 <div class="modal-title">Sobre o Amparo HAZAQ e Gilberto Moreira</div>
 <div class="modal-body">
 <p><strong>O Amparo HAZAQ</strong> foi criado como um Programa de Desenvolvimento Pessoal para ajudar pessoas não apenas com vícios químicos e não químicos, mas com outras instabilidades emocionais e vulnerabilidades sociais, oferecendo um caminho de restauração integral (física, mental e espiritual).</p>
@@ -296,44 +331,30 @@ font-weight: 600;
 </div>
 </div>
 </div>
-  
-      <script>
-        // Obter elementos do modal
-        var modal = document.getElementById("infoModal");
-        var logoBtn = document.getElementById("openModalBtn"); 
-        var textBtn = document.getElementById("openModalBtnText"); // O novo botão
-        var span = document.getElementsByClassName("close-modal")[0];
 
-        // Função para abrir o modal (clicando na imagem)
-        logoBtn.onclick = function() {
-            modal.style.display = "block";
-        }
+<script>
+    // Obter elementos do modal
+    var modal = document.getElementById("infoModal");
+    var btn = document.getElementById("openModalBtn");
+    var span = document.getElementsByClassName("close-modal")[0];
 
-        // Função para abrir o modal (clicando no novo botão visível)
-        if(textBtn) {
-            textBtn.onclick = function() {
-                modal.style.display = "block";
-            }
-        }
+    // Função para abrir o modal ao clicar no botão
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
 
-        // Função para fechar o modal ao clicar no X
-        span.onclick = function() {
+    // Função para fechar o modal ao clicar no X
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Função para fechar o modal ao clicar fora dele
+    window.onclick = function(event) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
-
-        // Função para fechar o modal ao clicar fora dele
-        window.onclick = function(event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-        
-        if(logoBtn.tagName === 'A') {
-            logoBtn.addEventListener('click', function(e) {
-               e.preventDefault(); 
-            });
-        }
-    </script>
+    }
+</script>
 
 </body>
 </html>
