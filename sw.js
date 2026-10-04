@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hazaq-cache-v2';
+const CACHE_NAME = 'hazaq-cache-v3';
 const urlsToCache = [
 'index.html',
 'logo-192.png',
