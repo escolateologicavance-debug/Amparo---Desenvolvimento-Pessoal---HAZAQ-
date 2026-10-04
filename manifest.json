@@ -1,16 +1,20 @@
 {
-"name": "Amparo HAZAQ",
-"short_name": "HAZAQ",
-"start_url": "index.html",
-"display": "standalone",
-"background_color": "#0d1b2a",
-"theme_color": "#0d1b2a",
-"description": "Suporte emocional e comportamental psicobíblico",
-"icons": [
-{
-"src": "1000362017.png",
-"sizes": "512x512",
-"type": "image/png"
-}
- ]
+  "name": "Amparo HAZAQ",
+  "short_name": "HAZAQ",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0d1b2a",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    {
+      "src": "logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo-192.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
