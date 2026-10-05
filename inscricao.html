@@ -140,7 +140,7 @@ cursor: pointer;
 
 .checkbox-item input, .radio-item input {
 cursor: pointer;
-scale: 1.1;
+transform: scale(1.1);
 }
 
 textarea {
@@ -363,95 +363,93 @@ padding: 15px;
 
 <script>
 function enviarWhatsApp(event) {
-event.preventDefault(); // Impede o recarregamento da página
+    event.preventDefault(); // Impede o recarregamento da página
 
-// Capturando os dados básicos e triagem
-const perfil = document.getElementById('perfil_vulneravel').value;
-const situacao = document.getElementById('situacao_moradia').value;
-const internar = document.querySelector('input[name="internar"]:checked')?.value || 'Não informado';
+    // Capturando os dados básicos e triagem
+    const perfil = document.getElementById('perfil_vulneravel').value;
+    const situacao = document.getElementById('situacao_moradia').value;
+    const internar = document.querySelector('input[name="internar"]:checked')?.value || 'Não informado';
+    
+    // Dados Pessoais
+    const nome = document.getElementById('nome').value;
+    const dataNasc = document.getElementById('data_nascimento').value || 'Não informada';
+    const documento = document.getElementById('documento').value || 'Não informado';
+    const contato = document.getElementById('contato_responsavel').value || 'Não informado';
 
-// Dados Pessoais
-const nome = document.getElementById('nome').value;
-const dataNasc = document.getElementById('data_nascimento').value || 'Não informada';
-const documento = document.getElementById('documento').value || 'Não informado';
-const contato = document.getElementById('contato_responsavel').value || 'Não informado';
+    // Endereço de Arquivamento
+    const logradouro = document.getElementById('logradouro').value || 'Não informado';
+    const bairro = document.getElementById('bairro').value || 'Não informado';
+    const cidade = document.getElementById('cidade').value || 'Não informado';
+    const estado = document.getElementById('estado').value || 'Não informado';
 
-// Endereço de Arquivamento
-const logradouro = document.getElementById('logradouro').value || 'Não informado';
-const bairro = document.getElementById('bairro').value || 'Não informado';
-const cidade = document.getElementById('cidade').value || 'Não informado';
-const estado = document.getElementById('estado').value || 'Não informado';
+    // Saúde e Anamnese
+    const pressao = document.querySelector('input[name="pressao_alta"]:checked')?.value || 'Não informado';
+    const diabetes = document.querySelector('input[name="diabetes"]:checked')?.value || 'Não informado';
+    const medicamentos = document.getElementById('medicamentos').value || 'Nenhum';
+    const enfermidades = document.getElementById('outras_enfermidades').value || 'Nenhuma';
 
-// Saúde e Anamnese
-const pressao = document.querySelector('input[name="pressao_alta"]:checked')?.value || 'Não informado';
-const diabetes = document.querySelector('input[name="diabetes"]:checked')?.value || 'Não informado';
-const medicamentos = document.getElementById('medicamentos').value || 'Nenhum';
-const enfermidades = document.getElementById('outras_enfermidades').value || 'Nenhuma';
+    // Alergias Higiene
+    let alergiasHigiene = [];
+    document.querySelectorAll('input[name="alergia_higiene"]:checked').forEach(cb => {
+        alergiasHigiene.push(cb.value);
+    });
+    const txtHigiene = alergiasHigiene.length > 0 ? alergiasHigiene.join(', ') : 'Nenhuma selecionada';
 
-// Alergias Higiene
-let alergiasHigiene = [];
-document.querySelectorAll('input[name="alergia_higiene"]:checked').forEach(cb => {
-alergiasHigiene.push(cb.value);
-});
-const txtHigiene = alergiasHigiene.length > 0 ? alergiasHigiene.join(', ') : 'Nenhuma selecionada';
+    // Alergias Alimentares
+    let alergiasAlimentar = [];
+    document.querySelectorAll('input[name="alergia_alimentar"]:checked').forEach(cb => {
+        alergiasAlimentar.push(cb.value);
+    });
+    const txtAlimentar = alergiasAlimentar.length > 0 ? alergiasAlimentar.join(', ') : 'Nenhuma selecionada';
+    
+    const outrasAlergias = document.getElementById('outras_alergias').value || 'Nenhuma';
+    const relatoSocial = document.getElementById('relato_social').value || 'Nenhum';
 
-// Alergias Alimentares
-let alergiasAlimentar = [];
-document.querySelectorAll('input[name="alergia_alimentar"]:checked').forEach(cb => {
-alergiasAlimentar.push(cb.value);
-});
-const txtAlimentar = alergiasAlimentar.length > 0 ? alergiasAlimentar.join(', ') : 'Nenhuma selecionada';
+    // Construção do texto formatado para o WhatsApp usando Template Strings corretos (crases)
+    let textoMsg = "*PROJETO AMPARO - NOVA MATRÍCULA*\n\n";
+    textoMsg += "*1. TRIAGEM INICIAL*\n";
+    textoMsg += `• Perfil: ${perfil}\n`;
+    textoMsg += `• Situação de Residência: ${situacao}\n`;
+    textoMsg += `• Irá Internar? ${internar}\n\n`;
+    
+    textoMsg += "*2. DADOS DO ASSISTIDO*\n";
+    textoMsg += `• Nome: ${nome}\n`;
+    textoMsg += `• Data Nasc.: ${dataNasc}\n`;
+    textoMsg += `• Doc: ${documento}\n`;
+    textoMsg += `• Contato Familiar: ${contato}\n\n`;
 
-const outrasAlergias = document.getElementById('outras_alergias').value || 'Nenhuma';
-const relatoSocial = document.getElementById('relato_social').value || 'Nenhum';
+    textoMsg += "*3. ENDEREÇO PARA ARQUIVAMENTO*\n";
+    textoMsg += `• Logradouro: ${logradouro}\n`;
+    textoMsg += `• Bairro: ${bairro}\n`;
+    textoMsg += `• Cidade/UF: ${cidade} - ${estado}\n\n`;
 
-// Construção do texto formatado para o WhatsApp
-let textoMsg = *PROJETO AMPARO - NOVA MATRÍCULA*\n\n;
-textoMsg += *1. TRIAGEM INICIAL*\n;
-textoMsg += • Perfil: ${perfil}\n; textoMsg +=• Situação de Residência: ${situacao}\n;
-textoMsg += • Irá Internar? ${internar}\n\n`;
+    textoMsg += "*4. CONDIÇÕES DE SAÚDE*\n";
+    textoMsg += `• Pressão Alta: ${pressao}\n`;
+    textoMsg += `• Diabetes: ${diabetes}\n`;
+    textoMsg += `• Medicamentos: ${medicamentos}\n`;
+    textoMsg += `• Outras Enfermidades: ${enfermidades}\n\n`;
 
-textoMsg += *2. DADOS DO ASSISTIDO*\n;
-textoMsg += • Nome:${nome}\n; textoMsg +=• Data Nasc.: latex
-{dataNasc}\n`; textoMsg += `• Doc: 
+    textoMsg += "*5. MAPEAMENTO DE ALERGIAS*\n";
+    textoMsg += `• Higiene: ${txtHigiene}\n`;
+    textoMsg += `• Alimentar: ${txtAlimentar}\n`;
+    textoMsg += `• Outras Alergias: ${outrasAlergias}\n\n`;
 
-{documento}\n; textoMsg +=• Contato Familiar: ${contato}\n\n;
+    textoMsg += "*6. PARECER SOCIAL*\n";
+    textoMsg += `${relatoSocial}`;
 
-textoMsg += *3. ENDEREÇO PARA ARQUIVAMENTO*\n;
-textoMsg += • Logradouro:${logradouro}\n; textoMsg +=• Bairro: latex
-{bairro}\n`; textoMsg += `• Cidade/UF: 
+    // Número configurado para receber as fichas
+    const numeroWhats = "5566984666186";
+    let urlFinal = "";
+    
+    // Detecta se é dispositivo móvel para usar o link nativo do app ou computador
+    if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+        urlFinal = `whatsapp://send?phone=${numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
+    } else {
+        urlFinal = `https://web.whatsapp.com/send?phone=${numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
+    }
 
-{cidade} - ${estado}\n\n;
-
-textoMsg += *4. CONDIÇÕES DE SAÚDE*\n;
-textoMsg += • Pressão Alta:${pressao}\n; textoMsg +=• Diabetes: latex
-{diabetes}\n`; textoMsg += `• Medicamentos: 
-
-{medicamentos}\n; textoMsg +=• Outras Enfermidades: ${enfermidades}\n\n;
-
-textoMsg += *5. MAPEAMENTO DE ALERGIAS*\n;
-textoMsg += • Higiene:${txtHigiene}\n; textoMsg +=• Alimentar: latex
-{txtAlimentar}\n`; textoMsg += `• Outras Alergias: 
-
-{outrasAlergias}\n\n`;
-
-textoMsg += *6. PARECER SOCIAL*\n;
-textoMsg += ${relatoSocial}`;
-
-// Links diferentes para Celular e Computador (Garante compatibilidade total)
-const numeroWhats = "5566984666186";
-let urlFinal = "";
-
-// Detecta se é dispositivo móvel para usar o link nativo do app
-if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-urlFinal = whatsapp://send?phone=${numeroWhats}&text=latex
-{encodeURIComponent(textoMsg)}`; } else { // Link para computador (WhatsApp Web ou Aplicativo Desktop) urlFinal = `https://web.whatsapp.com/send?phone=
-
-{numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
-}
-
-// Redireciona na mesma aba, evitando o bloqueio de pop-ups do navegador
-window.location.href = urlFinal;
+    // Redireciona para abrir o WhatsApp com a mensagem pronta
+    window.location.href = urlFinal;
 }
 </script>
 
