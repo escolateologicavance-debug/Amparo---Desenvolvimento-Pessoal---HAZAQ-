@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amparo HAZAQ - Ficha de Inscrição e Triagem</title>
+<style>
+:root {
+--primary-color: #2c3e50;
+--secondary-color: #18bc9c;
+--whatsapp-color: #25d366;
+--bg-color: #f5f6fa;
+--card-bg: #ffffff;
+--text-color: #333333;
+--border-color: #dcdde1;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--bg-color);
+color: var(--text-color);
+margin: 0;
+padding: 20px;
+display: flex;
+justify-content: center;
+}
+
+.container {
+width: 100%;
+max-width: 850px;
+background: var(--card-bg);
+padding: 30px;
+border-radius: 8px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+text-align: center;
+border-bottom: 2px solid var(--secondary-color);
+padding-bottom: 15px;
+margin-bottom: 30px;
+}
+
+header h1 {
+color: var(--primary-color);
+margin: 0;
+font-size: 24px;
+text-transform: uppercase;
+}
+
+header p {
+color: #7f8c8d;
+margin: 5px 0 0 0;
+font-size: 14px;
+}
+
+fieldset {
+border: 1px solid var(--border-color);
+border-radius: 6px;
+padding: 20px;
+margin-bottom: 25px;
+background-color: #fbfbfc;
+}
+
+legend {
+font-weight: bold;
+color: var(--primary-color);
+padding: 0 10px;
+font-size: 16px;
+text-transform: uppercase;
+}
+
+.form-group {
+margin-bottom: 15px;
+}
+
+.row {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+.col {
+flex: 1;
+min-width: 200px;
+}
+
+.col-2 {
+flex: 2;
+min-width: 250px;
+}
+
+.col-3 {
+flex: 3;
+min-width: 300px;
+}
+
+label {
+display: block;
+margin-bottom: 5px;
+font-weight: 600;
+font-size: 14px;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+select,
+textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid var(--border-color);
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 14px;
+transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+border-color: var(--secondary-color);
+outline: none;
+}
+
+.radio-checkbox-group {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+padding-top: 5px;
+}
+
+.checkbox-item, .radio-item {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+cursor: pointer;
+}
+
+.checkbox-item input, .radio-item input {
+cursor: pointer;
+scale: 1.1;
+}
+
+textarea {
+resize: vertical;
+min-height: 80px;
+}
+
+.btn-container {
+text-align: center;
+margin-top: 20px;
+}
+
+button {
+background-color: var(--whatsapp-color);
+color: white;
+border: none;
+padding: 14px 35px;
+font-size: 16px;
+font-weight: bold;
+border-radius: 4px;
+cursor: pointer;
+transition: background 0.2s;
+box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+button:hover {
+background-color: #1ebd59;
+}
+
+@media (max-width: 600px) {
+.row {
+flex-direction: column;
+gap: 0;
+}
+body {
+padding: 10px;
+}
+.container {
+padding: 15px;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<header>
+<h1>Projeto Amparo</h1>
+<p>Ficha de Inscrição, Triagem e Anamnese Social</p>
+</header>
+
+<form id="formInscricao" onsubmit="enviarWhatsApp(event)">
+
+<!-- BLOCO 1: TRIAGEM INICIAL -->
+<fieldset>
+<legend>1. Triagem e Enquadramento Inicial</legend>
+<div class="row">
+<div class="col form-group">
+<label for="perfil_vulneravel">Perfil do Assistido:</label>
+<select id="perfil_vulneravel" required>
+<option value="">Selecione...</option>
+<option value="Criança">Criança (0 a 11 anos)</option>
+<option value="Adolescente">Adolescente (12 a 17 anos)</option>
+<option value="Adulto">Adulto (18 a 59 anos)</option>
+<option value="Idoso">Idoso (60 anos ou mais)</option>
+</select>
+</div>
+<div class="col form-group">
+<label for="situacao_moradia">Situação de Residência:</label>
+<select id="situacao_moradia" required>
+<option value="">Selecione...</option>
+<option value="Em situação de rua">Em situação de rua</option>
+<option value="Possui residência / Família (Fragilidade Social)">Possui residência / Família (Fragilidade Social)</option>
+<option value="Oriundo de outro abrigo/orfanato">Oriundo de outro abrigo/orfanato</option>
+<option value="Não identificada / Desorientado">Não identificada / Desorientado</option>
+</select>
+</div>
+</div>
+
+<div class="form-group">
+<label>Haverá internamento institucional (acolhimento contínuo)?</label>
+<div class="radio-checkbox-group">
+<label class="radio-item">
+<input type="radio" name="internar" value="Sim" required> Sim, necessita de acolhimento em tempo integral.
+</label>
+<label class="radio-item">
+<input type="radio" name="internar" value="Não"> Não, atendimento/suporte ambulatorial diurno.
+</label>
+</div>
+</div>
+</fieldset>
+
+<!-- BLOCO 2: DADOS PESSOAIS -->
+<fieldset>
+<legend>2. Dados Pessoais</legend>
+<div class="row">
+<div class="col-3 form-group">
+<label for="nome">Nome Completo (ou alcunha):</label>
+<input type="text" id="nome" placeholder="Digite o nome completo" required>
+</div>
+<div class="col form-group">
+<label for="data_nascimento">Data de Nascimento:</label>
+<input type="date" id="data_nascimento">
+</div>
+</div>
+
+<div class="row">
+<div class="col form-group">
+<label for="documento">RG ou CPF (Se houver):</label>
+<input type="text" id="documento" placeholder="Documentos disponíveis">
+</div>
+<div class="col form-group">
+<label for="contato_responsavel">Contato de Familiar / Responsável:</label>
+<input type="tel" id="contato_responsavel" placeholder="(00) 00000-0000">
+</div>
+</div>
+</fieldset>
+
+<!-- BLOCO 3: ENDEREÇO DE ARQUIVAMENTO -->
+<fieldset>
+<legend>3. Endereço de Origem ou Destino para Arquivamento</legend>
+<div class="row">
+<div class="col-3 form-group">
+<label for="logradouro">Rua/Avenida/Logradouro:</label>
+<input type="text" id="logradouro" placeholder="Ex: Rua das Flores, Nº 123 (ou local da abordagem)">
+</div>
+<div class="col form-group">
+<label for="bairro">Bairro:</label>
+<input type="text" id="bairro" placeholder="Digite o bairro">
+</div>
+</div>
+<div class="row">
+<div class="col-2 form-group">
+<label for="cidade">Cidade/Município:</label>
+<input type="text" id="cidade" placeholder="Ex: Itanhangá" value="Itanhangá">
+</div>
+<div class="col form-group">
+<label for="estado">Estado (UF):</label>
+<input type="text" id="estado" placeholder="Ex: MT" value="MT">
+</div>
+</div>
+</fieldset>
+
+<!-- BLOCO 4: CONDICÕES DE SAÚDE e ENFERMIDADES -->
+<fieldset>
+<legend>4. Condições de Saúde e Enfermidades</legend>
+<div class="row">
+<div class="col form-group">
+<label>Possui Pressão Alta (Hipertensão)?</label>
+<div class="radio-checkbox-group">
+<label class="radio-item"><input type="radio" name="pressao_alta" value="Sim"> Sim</label>
+<label class="radio-item"><input type="radio" name="pressao_alta" value="Não"> Não</label>
+<label class="radio-item"><input type="radio" name="pressao_alta" value="Não Sabe" checked> Não sabe</label>
+</div>
+</div>
+<div class="col form-group">
+<label>Possui Diabetes?</label>
+<div class="radio-checkbox-group">
+<label class="radio-item"><input type="radio" name="diabetes" value="Sim"> Sim</label>
+<label class="radio-item"><input type="radio" name="diabetes" value="Não"> Não</label>
+<label class="radio-item"><input type="radio" name="diabetes" value="Não Sabe" checked> Não sabe</label>
+</div>
+</div>
+</div>
+
+<div class="form-group">
+<label for="medicamentos">Uso regular de medicamentos de uso contínuo (quais?):</label>
+<textarea id="medicamentos" placeholder="Ex: Medicamentos em uso..."></textarea>
+</div>
+
+<div class="form-group">
+<label for="outras_enfermidades">Outras enfermidades ou limitações importantes:</label>
+<textarea id="outras_enfermidades" placeholder="Diagnósticos, limitações físicas ou psiquiátricas..."></textarea>
+</div>
+</fieldset>
+
+<!-- BLOCO 5: MAPEAMENTO DE ALERGIAS -->
+<fieldset>
+<legend>5. Mapeamento de Alergias e Restrições</legend>
+<div class="form-group">
+<label>Selecione os itens com alergia relatada:</label>
+
+<h4 style="margin: 10px 0 5px 0; font-size: 14px; color: #555;">Produtos de Higiene Pessoal:</h4>
+<div class="radio-checkbox-group" style="margin-bottom: 15px;">
+<label class="checkbox-item"><input type="checkbox" name="alergia_higiene" value="Sabonete"> Sabonete</label>
+<label class="checkbox-item"><input type="checkbox" name="alergia_higiene" value="Sabão em Pó"> Sabão em Pó</label>
+<label class="checkbox-item"><input type="checkbox" name="alergia_higiene" value="Detergente"> Detergente</label>
+<label class="checkbox-item"><input type="checkbox" name="alergia_higiene" value="Shampoo/Condicionador"> Shampoo/Condicionador</label>
+</div>
+
+<h4 style="margin: 10px 0 5px 0; font-size: 14px; color: #555;">Gêneros Alimentícios e Intolerâncias:</h4>
+<div class="radio-checkbox-group" style="margin-bottom: 15px;">
+<label class="checkbox-item"><input type="checkbox" name="alergia_alimentar" value="Lactose"> Lactose</label>
+<label class="checkbox-item"><input type="checkbox" name="alergia_alimentar" value="Glúten"> Glúten</label>
+<label class="checkbox-item"><input type="checkbox" name="alergia_alimentar" value="Ovo"> Ovo</label>
+<label class="checkbox-item"><input type="checkbox" name="alergia_alimentar" value="Amendoim/Nozes"> Amendoim</label>
+</div>
+</div>
+
+<div class="form-group">
+<label for="outras_alergias">Outras Alergias:</label>
+<textarea id="outras_alergias" placeholder="Medicamentos, picadas de insetos ou outros itens..."></textarea>
+</div>
+</fieldset>
+
+<!-- BLOCO 6: OBSERVAÇÕES SOCIAIS -->
+<fieldset>
+<legend>6. Relato/Parecer Social Breve</legend>
+<div class="form-group">
+<label for="relato_social">Contexto da abordagem ou principais necessidades:</label>
+<textarea id="relato_social" placeholder="Breve histórico da situação observada..."></textarea>
+</div>
+</fieldset>
+
+<div class="btn-container">
+<button type="submit">Enviar Matrícula para o WhatsApp</button>
+</div>
+</form>
+</div>
+
+<script>
+function enviarWhatsApp(event) {
+event.preventDefault(); // Impede o recarregamento da página
+
+// Capturando os dados básicos e triagem
+const perfil = document.getElementById('perfil_vulneravel').value;
+const situacao = document.getElementById('situacao_moradia').value;
+const internar = document.querySelector('input[name="internar"]:checked')?.value || 'Não informado';
+
+// Dados Pessoais
+const nome = document.getElementById('nome').value;
+const dataNasc = document.getElementById('data_nascimento').value || 'Não informada';
+const documento = document.getElementById('documento').value || 'Não informado';
+const contato = document.getElementById('contato_responsavel').value || 'Não informado';
+
+// Endereço de Arquivamento
+const logradouro = document.getElementById('logradouro').value || 'Não informado';
+const bairro = document.getElementById('bairro').value || 'Não informado';
+const cidade = document.getElementById('cidade').value || 'Não informado';
+const estado = document.getElementById('estado').value || 'Não informado';
+
+// Saúde e Anamnese
+const pressao = document.querySelector('input[name="pressao_alta"]:checked')?.value || 'Não informado';
+const diabetes = document.querySelector('input[name="diabetes"]:checked')?.value || 'Não informado';
+const medicamentos = document.getElementById('medicamentos').value || 'Nenhum';
+const enfermidades = document.getElementById('outras_enfermidades').value || 'Nenhuma';
+
+// Alergias Higiene
+let alergiasHigiene = [];
+document.querySelectorAll('input[name="alergia_higiene"]:checked').forEach(cb => {
+alergiasHigiene.push(cb.value);
+});
+const txtHigiene = alergiasHigiene.length > 0 ? alergiasHigiene.join(', ') : 'Nenhuma selecionada';
+
+// Alergias Alimentares
+let alergiasAlimentar = [];
+document.querySelectorAll('input[name="alergia_alimentar"]:checked').forEach(cb => {
+alergiasAlimentar.push(cb.value);
+});
+const txtAlimentar = alergiasAlimentar.length > 0 ? alergiasAlimentar.join(', ') : 'Nenhuma selecionada';
+
+const outrasAlergias = document.getElementById('outras_alergias').value || 'Nenhuma';
+const relatoSocial = document.getElementById('relato_social').value || 'Nenhum';
+
+// Construção do texto formatado para o WhatsApp
+let textoMsg = *PROJETO AMPARO - NOVA MATRÍCULA*\n\n;
+textoMsg += *1. TRIAGEM INICIAL*\n;
+textoMsg += • Perfil: ${perfil}\n; textoMsg +=• Situação de Residência: ${situacao}\n;
+textoMsg += • Irá Internar? ${internar}\n\n`;
+
+textoMsg += *2. DADOS DO ASSISTIDO*\n;
+textoMsg += • Nome:${nome}\n; textoMsg +=• Data Nasc.: latex
+{dataNasc}\n`; textoMsg += `• Doc: 
+
+{documento}\n; textoMsg +=• Contato Familiar: ${contato}\n\n;
+
+textoMsg += *3. ENDEREÇO PARA ARQUIVAMENTO*\n;
+textoMsg += • Logradouro:${logradouro}\n; textoMsg +=• Bairro: latex
+{bairro}\n`; textoMsg += `• Cidade/UF: 
+
+{cidade} - ${estado}\n\n;
+
+textoMsg += *4. CONDIÇÕES DE SAÚDE*\n;
+textoMsg += • Pressão Alta:${pressao}\n; textoMsg +=• Diabetes: latex
+{diabetes}\n`; textoMsg += `• Medicamentos: 
+
+{medicamentos}\n; textoMsg +=• Outras Enfermidades: ${enfermidades}\n\n;
+
+textoMsg += *5. MAPEAMENTO DE ALERGIAS*\n;
+textoMsg += • Higiene:${txtHigiene}\n; textoMsg +=• Alimentar: latex
+{txtAlimentar}\n`; textoMsg += `• Outras Alergias: 
+
+{outrasAlergias}\n\n`;
+
+textoMsg += *6. PARECER SOCIAL*\n;
+textoMsg += ${relatoSocial}`;
+
+// Links diferentes para Celular e Computador (Garante compatibilidade total)
+const numeroWhats = "5566984666186";
+let urlFinal = "";
+
+// Detecta se é dispositivo móvel para usar o link nativo do app
+if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+urlFinal = whatsapp://send?phone=${numeroWhats}&text=latex
+{encodeURIComponent(textoMsg)}`; } else { // Link para computador (WhatsApp Web ou Aplicativo Desktop) urlFinal = `https://web.whatsapp.com/send?phone=
+
+{numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
+}
+
+// Redireciona na mesma aba, evitando o bloqueio de pop-ups do navegador
+window.location.href = urlFinal;
+}
+</script>
+
+</body>
+</html>
