@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amparo HAZAQ - Estruturação do Programa e Contrato</title>
+<style>
+:root {
+--primary: #1e3a8a;
+--primary-light: #3b82f6;
+--secondary: #0f172a;
+--accent: #d97706;
+--bg: #f8fafc;
+--card-bg: #ffffff;
+--text: #334155;
+--text-dark: #0f172a;
+--border: #e2e8f0;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+background-color: var(--bg);
+color: var(--text);
+line-height: 1.6;
+padding: 20px;
+}
+
+.container {
+max-width: 1000px;
+margin: 0 auto;
+}
+
+header {
+text-align: center;
+padding: 40px 20px;
+background: linear-gradient(135deg, var(--secondary), var(--primary));
+color: white;
+border-radius: 12px;
+margin-bottom: 30px;
+box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+}
+
+header h1 {
+font-size: 2.2rem;
+margin-bottom: 8px;
+letter-spacing: 1px;
+}
+
+header p {
+font-size: 1.1rem;
+opacity: 0.9;
+}
+
+.section-title {
+color: var(--primary);
+border-bottom: 3px solid var(--primary-light);
+padding-bottom: 8px;
+margin: 30px 0 20px 0;
+font-size: 1.5rem;
+}
+
+/* Estações Grid */
+.stations-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 15px;
+margin-bottom: 30px;
+}
+
+.station-card {
+background: var(--card-bg);
+border: 1px solid var(--border);
+border-radius: 8px;
+padding: 15px;
+border-top: 4px solid var(--primary-light);
+box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.station-card h3 {
+font-size: 1.1rem;
+color: var(--primary);
+margin-bottom: 8px;
+}
+
+.station-card p {
+font-size: 0.9rem;
+margin-bottom: 12px;
+}
+
+.station-card ul {
+list-style-type: none;
+font-size: 0.85rem;
+}
+
+.station-card li {
+margin-bottom: 6px;
+padding-left: 10px;
+border-left: 2px solid var(--accent);
+}
+
+/* Importância */
+.importance-box {
+background: var(--card-bg);
+border-radius: 8px;
+padding: 20px;
+margin-bottom: 30px;
+border: 1px solid var(--border);
+}
+
+.importance-item {
+margin-bottom: 15px;
+}
+
+.importance-item strong {
+color: var(--text-dark);
+}
+
+/* Contrato */
+.contract-container {
+background: var(--card-bg);
+padding: 40px;
+border-radius: 8px;
+border: 1px solid var(--border);
+box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+}
+
+.contract-header {
+text-align: center;
+margin-bottom: 30px;
+border-bottom: 2px solid var(--text-dark);
+padding-bottom: 15px;
+}
+
+.contract-clause {
+margin-bottom: 20px;
+}
+
+.contract-clause h4 {
+color: var(--text-dark);
+margin-bottom: 8px;
+font-size: 1rem;
+text-transform: uppercase;
+}
+
+.field-input {
+border: none;
+border-bottom: 1px solid var(--text);
+background: transparent;
+padding: 2px 5px;
+font-weight: bold;
+color: var(--primary);
+width: auto;
+min-width: 150px;
+}
+
+.upload-box {
+background: #eff6ff;
+border: 2px dashed var(--primary-light);
+padding: 15px;
+border-radius: 6px;
+margin: 15px 0;
+text-align: center;
+}
+
+/* Anexo */
+.anexo-box {
+margin-top: 40px;
+background: #fffbe3;
+border: 1px solid #fef08a;
+padding: 25px;
+border-radius: 8px;
+}
+
+/* Assinatura Canvas */
+.signature-section {
+margin-top: 30px;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
+}
+
+.sig-card {
+border: 1px solid var(--border);
+padding: 15px;
+border-radius: 6px;
+text-align: center;
+background: #fafafa;
+}
+
+canvas {
+border: 1px solid #ccc;
+border-radius: 4px;
+background: #fff;
+cursor: crosshair;
+width: 100%;
+height: 120px;
+}
+
+.btn-clear {
+background: #ef4444;
+color: white;
+border: none;
+padding: 4px 8px;
+font-size: 0.8rem;
+border-radius: 4px;
+cursor: pointer;
+margin-top: 5px;
+}
+
+.action-buttons {
+text-align: center;
+margin-top: 40px;
+}
+
+.btn-primary {
+background: var(--primary);
+color: white;
+border: none;
+padding: 12px 30px;
+font-size: 1rem;
+font-weight: bold;
+border-radius: 6px;
+cursor: pointer;
+transition: background 0.2s;
+}
+
+.btn-primary:hover {
+background: var(--primary-light);
+}
+
+/* Estilo para Impressão/PDF */
+@media print {
+body {
+background: white;
+padding: 0;
+}
+.stations-grid, .importance-box, .section-title, header, .upload-box, .btn-clear, .action-buttons {
+display: none !important;
+}
+.contract-container {
+border: none;
+padding: 0;
+box-shadow: none;
+}
+.anexo-box {
+background: white;
+border: 1px solid #000;
+page-break-before: always;
+}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<header>
+<h1>AMPARO HAZAQ</h1>
+<p>Suporte Emocional e Comportamental Psicobíblico</p>
+</header>
+
+<h2 class="section-title">📅 Estruturação dos 12 Pilares em 4 Estações</h2>
+
+<div class="stations-grid">
+<div class="station-card">
+<h3>Estação 1: Fundamentação e Tomada de Consciência</h3>
+<p><strong>Período:</strong> Meses 1 a 3</p>
+<p><strong>Objetivo:</strong> Romper a negação, estabelecer o propósito e assumir o controle dos pensamentos.</p>
+<ul>
+<li><strong>Mês 1:</strong> Reconhecimento da Realidade</li>
+<li><strong>Mês 2:</strong> Fortaleza do Propósito</li>
+<li><strong>Mês 3:</strong> Domínio do Pensamento</li>
+</ul>
+</div>
+
+<div class="station-card">
+<h3>Estação 2: Reestruturação Comportamental e Rotina</h3>
+<p><strong>Período:</strong> Meses 4 a 6</p>
+<p><strong>Objetivo:</strong> Organizar o tempo, reabilitar a saúde física e desenvolver resistência às crises.</p>
+<ul>
+<li><strong>Mês 4:</strong> A Gestão do Tempo</li>
+<li><strong>Mês 5:</strong> Disciplina do Corpo</li>
+<li><strong>Mês 6:</strong> Resiliência nas Provações</li>
+</ul>
+</div>
+
+<div class="station-card">
+<h3>Estação 3: Sincronização de Ambientes e Relações</h3>
+<p><strong>Período:</strong> Meses 7 a 9</p>
+<p><strong>Objetivo:</strong> Alinhar o discurso, reconfigurar o ambiente e reeducar os sistemas de recompensa.</p>
+<ul>
+<li><strong>Mês 7:</strong> Poder da Palavra e Confissão</li>
+<li><strong>Mês 8:</strong> Ambiente Restaurado</li>
+<li><strong>Mês 9:</strong> A Armadilha da Dopamina Barata</li>
+</ul>
+</div>
+
+<div class="station-card">
+<h3>Estação 4: Consolidação da Identidade e Legado</h3>
+<p><strong>Período:</strong> Meses 10 a 12</p>
+<p><strong>Objetivo:</strong> Curar feridas interpessoais, firmar o caráter sóbrio e servir de amparo a terceiros.</p>
+<ul>
+<li><strong>Mês 10:</strong> Perdão e Reconciliação</li>
+<li><strong>Mês 11:</strong> Firmeza na Identidade</li>
+<li><strong>Mês 12:</strong> Legado do Cuidado</li>
+</ul>
+</div>
+</div>
+
+<h2 class="section-title">📖 Importância de Cada Temporada</h2>
+<div class="importance-box">
+<div class="importance-item">
+<strong>Estação 1 (Fundamentação e Consciência):</strong> Indispensável para tirar o assistido do ciclo de autossubterfúgio. Sem encarar a realidade objetiva e redefinir a intenção existencial, qualquer tentativa de sobriedade torna-se frágil.
+</div>
+<div class="importance-item">
+<strong>Estação 2 (Reestruturação e Rotina):</strong> Transfere o aprendizado teórico para a biologia e a rotina diária. A regulação do sono, alimentação, exercícios e gestão do tempo cria a estrutura fisiológica e mental para resistir à fissura.
+</div>
+<div class="importance-item">
+<strong>Estação 3 (Sincronização de Ambientes):</strong> Protege a recuperação reduzindo os gatilhos externos e internos. Modificar o ambiente, moderar os estímulos de dopamina rápida e alinhar a linguagem previne recaídas socioambientais.
+</div>
+<div class="importance-item">
+<strong>Estação 4 (Consolidação e Legado):</strong> Garante a sustentabilidade do processo a longo prazo. Trata das raízes emocionais (ressentimentos), fixa a nova identidade sóbria e introduz a responsabilidade social, fechando o ciclo do amparo.
+</div>
+</div>
+
+<!-- CONTRATO E REGULAMENTO -->
+<h2 class="section-title">📝 Minuta do Contrato e Regulamento de Adesão</h2>
+
+<div class="contract-container">
+<div class="contract-header">
+<h2>CONTRATO DE PRESTAÇÃO DE SERVIÇOS DE SUPORTE EMOCIONAL E TERMO DE RESPONSABILIDADE CÍVEL</h2>
+<p><strong>AMPARO HAZAQ</strong></p>
+</div>
+
+<div class="contract-clause">
+<h4>DAS PARTES CONTRATANTES</h4>
+<p><strong>CONTRATADA:</strong> AMPARO HAZAQ - SUPORTE EMOCIONAL E COMPORTAMENTAL PSICOBÍBLICO, pessoa jurídica de direito privado, CNPJ nº <input type="text" class="field-input" placeholder="00.000.000/0001-00">, com sede em <input type="text" class="field-input" placeholder="Endereço Completo">.</p>
+<br>
+<p><strong>CONTRATANTE / ASSISTIDO(A):</strong><br>
+Nome: <input type="text" class="field-input" style="width: 60%;" placeholder="Nome Completo do Assistido"><br>
+CPF: <input type="text" class="field-input" placeholder="000.000.000-00"> | RG: <input type="text" class="field-input" placeholder="0000000-0"><br>
+Endereço: <input type="text" class="field-input" style="width: 70%;" placeholder="Rua, Número, Bairro, Cidade - UF"></p>
+<br>
+<p><strong>RESPONSÁVEL FAMILIAR / FIADOR(A) E CO-OBRIGADO(A):</strong><br>
+Nome: <input type="text" class="field-input" style="width: 60%;" placeholder="Nome do Responsável Legal"><br>
+CPF: <input type="text" class="field-input" placeholder="000.000.000-00"> | RG: <input type="text" class="field-input" placeholder="0000000-0"><br>
+Grau de Parentesco: <input type="text" class="field-input" placeholder="Ex: Pai, Mãe, Cônjuge"><br>
+Endereço: <input type="text" class="field-input" style="width: 70%;" placeholder="Rua, Número, Bairro, Cidade - UF"></p>
+</div>
+
+<div class="contract-clause">
+<h4>CLÁUSULA PRIMEIRA – DO OBJETO E DA NATUREZA DO PROGRAMA</h4>
+<p>1.1. O presente instrumento tem por objeto a prestação de serviços de apoio, acompanhamento e orientação no programa Amparo HAZAQ, estruturado em 12 pilares desenvolvidos ao longo de 12 meses (4 Estações trimestrais).</p>
+<p>1.2. O programa possui caráter voluntário, educativo, comportamental e de inspiração psicobíblica. <strong>Não constitui estabelecimento médico, psiquiátrico ou unidade de internação compulsória/involuntária.</strong></p>
+</div>
+
+<div class="contract-clause">
+<h4>CLÁUSULA SEGUNDA – DOS DEVERES DO ASSISTIDO (RECUPERANDO)</h4>
+<p>2.1. O Assistido compromete-se a:</p>
+<p>a) Cumprir integralmente a agenda de atividades, cronograma das Estações e orientações comportamentais;</p>
+<p>b) Manter postura respeitosa com mentores, facilitadores e demais participantes;</p>
+<p>c) ABSTER-SE do uso, posse ou circulação de substâncias psicoativas ilícitas ou bebidas alcoólicas durante a vigência do programa;</p>
+<p>d) Participar ativamente das tarefas de fixação diárias e semanais.</p>
+</div>
+
+<div class="contract-clause">
+<h4>CLÁUSULA TERCEIRA – DOS DEVERES DA FAMÍLIA E CO-RESPONSABILIDADE</h4>
+<p>3.1. A família reconhece seu papel primário no suporte emocional e na reorganização do ambiente relacional (conforme Art. 229 da CF e Código Civil).</p>
+<p>3.2. Constituem deveres da Família/Responsável:</p>
+<p>a) Participar dos encontros virtuais ou presenciais de orientação familiar programados pela CONTRATADA;</p>
+<p>b) Adequar o ambiente doméstico conforme as diretrizes da Estação 3 (Ambiente Restaurado);</p>
+<p>c) Manter a pontualidade nos pagamentos ou na prestação de contas dos custeios do programa.</p>
+</div>
+
+<div class="contract-clause">
+<h4>CLÁUSULA QUARTA – DOS CUSTEIOS, COMPROVAÇÃO DE HIPOSSUFICÊNCIA E PAPEL DO ESTADO</h4>
+<p>4.1. O valor total do programa de 12 meses é estipulado em R
+ <input type="text" class="field-input" placeholder="0,00"> com vencimento todo dia <input type="text" class="field-input" style="min-width: 50px;" placeholder="10">.</p>
+<p>4.2. <strong>DA ISENÇÃO OU CONCESSÃO DE BOLSA POR IMPOSSIBILIDADE FINANCEIRA:</strong> A alegação de impossibilidade financeira da família exige a anexação obrigatória dos comprovantes abaixo (Olerite dos últimos 3 meses, Imposto de Renda, Extratos bancários ou CadÚnico).</p>
+
+<div class="upload-box">
+<label for="fileDocs"><strong>📎 Anexar Provas de Renda / Hipossuficiência (Olerite, CadÚnico):</strong></label><br><br>
+<input type="file" id="fileDocs" multiple accept=".pdf,.png,.jpg,.jpeg">
+</div>
+
+<p>4.3. <strong>DO DEVER DO ESTADO:</strong> Na hipótese de incapacidade financeira total da família e indisponibilidade de vagas subsidiadas pela CONTRATADA, cabe à família pleitear junto aos órgãos públicos (RAPS/CAPS/SUAS) as políticas públicas gratuitas garantidas pelo Estado.</p>
+</div>
+
+<div class="contract-clause">
+<h4>CLÁUSULA QUINTA – DA DESISTÊNCIA ANTECIPADA E TERMO DE RESPONSABILIDADE CÍVEL</h4>
+<p>5.1. Sendo o programa pautado na adesão voluntária, o Assistido poderá solicitar o desligamento a qualquer tempo.</p>
+<p>5.2. Caso o Assistido opte pelo desligamento antes da conclusão dos 12 meses, este ou seu Responsável Legal deverá assinar obrigatoriamente o Termo de Desligamento e Responsabilidade Cível Antecipada (Anexo I).</p>
+<p>5.3. A saída antecipada exime a CONTRATADA de qualquer responsabilidade civil, criminal ou comportamental sobre recaídas, danos materiais, pessoais ou a terceiros cometidos pelo assistido após a sua interrupção voluntária do programa.</p>
+</div>
+
+<div class="contract-clause">
+<h4>CLÁUSULA SEXTA – DA PROTEÇÃO DE DADOS (LGPD)</h4>
+<p>6.1. Todos os dados pessoais e informações fornecidas na Ficha Geral, Anamnese e Triagem serão tratados sob estrito sigilo profissional, conforme as disposições da Lei Geral de Proteção de Dados (Lei nº 13.709/2018).</p>
+</div>
+
+<!-- ANEXO I -->
+<div class="anexo-box">
+<h3 style="text-align: center; margin-bottom: 15px;">📎 ANEXO I: TERMO DE DESLIGAMENTO VOLUNTÁRIO E RESPONSABILIDADE CÍVEL ANTECIPADA</h3>
+<p>Eu, [Assistido Nomeado Acima], juntamente com meu Responsável Legal, declaro(amos) por livre e espontânea vontade a decisão de interromper a participação no Programa Amparo HAZAQ na Estação nº <input type="text" class="field-input" style="min-width: 50px;" placeholder="Ex: 2">, antes do término do período previsto de 12 meses.</p>
+<br>
+<p><strong>DECLARO(AMOS) CIÊNCIA DE QUE:</strong></p>
+<p>1. A interrupção prematura do programa interrompe a consolidação dos 12 Pilares comportamentais e emocionais recomendados para a sobriedade sustentável.</p>
+<p>2. A CONTRATADA e seus mentores ficam totalmente isentos de qualquer responsabilidade civil, administrativa ou penal por atos, comportamentos, recaídas ou danos que eu venha a causar a mim mesmo, à minha família ou a terceiros a partir desta data.</p>
+<p>3. Assumo(imos) integralmente os riscos socioemocionais decorrentes da decisão de interrupção do programa de acompanhamento.</p>
+</div>
+
+<!-- ÁREA DE ASSINATURAS -->
+<div style="margin-top: 30px; text-align: center;">
+<p><strong>Data:</strong> <span id="currentDate">20 de Outubro de 2026</span></p>
+<br>
+<label>
+<input type="checkbox" id="chkAceito"> <strong>[ LI E ACEITO OS TERMOS DO CONTRATO E REGULAMENTO HAZAQ ]</strong>
+</label>
+</div>
+
+<div class="signature-section">
+<div class="sig-card">
+<p><strong>Assinatura do Assistido</strong></p>
+<canvas id="sigAssistido"></canvas>
+<button class="btn-clear" onclick="clearCanvas('sigAssistido')">Limpar</button>
+</div>
+
+<div class="sig-card">
+<p><strong>Assinatura do Responsável / Fiador</strong></p>
+<canvas id="sigResponsavel"></canvas>
+<button class="btn-clear" onclick="clearCanvas('sigResponsavel')">Limpar</button>
+</div>
+
+<div class="sig-card">
+<p><strong>Representação Amparo HAZAQ</strong></p>
+<canvas id="sigHazaq"></canvas>
+<button class="btn-clear" onclick="clearCanvas('sigHazaq')">Limpar</button>
+</div>
+</div>
+
+<div class="action-buttons">
+<button class="btn-primary" onclick="window.print()">🖨️ Validar e Imprimir / Gerar PDF</button>
+</div>
+
+</div>
+
+</div>
+
+<script>
+// Inicialização simples de Canvas para Assinaturas Digitais
+function setupCanvas(canvasId) {
+const canvas = document.getElementById(canvasId);
+if(!canvas) return;
+const ctx = canvas.getContext('2d');
+let drawing = false;
+
+// Resolução ajustada
+canvas.width = canvas.parentElement.clientWidth - 30;
+canvas.height = 120;
+
+function getPos(e) {
+const rect = canvas.getBoundingClientRect();
+const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+return {
+x: clientX - rect.left,
+y: clientY - rect.top
+};
+}
+
+function startDraw(e) {
+drawing = true;
+const pos = getPos(e);
+ctx.beginPath();
+ctx.moveTo(pos.x, pos.y);
+}
+
+function draw(e) {
+if (!drawing) return;
+e.preventDefault();
+const pos = getPos(e);
+ctx.lineTo(pos.x, pos.y);
+ctx.strokeStyle = "#1e3a8a";
+ctx.lineWidth = 2;
+ctx.stroke();
+}
+
+function stopDraw() {
+drawing = false;
+}
+
+canvas.addEventListener('mousedown', startDraw);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDraw);
+canvas.addEventListener('mouseleave', stopDraw);
+
+canvas.addEventListener('touchstart', startDraw);
+canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchend', stopDraw);
+}
+
+function clearCanvas(canvasId) {
+const canvas = document.getElementById(canvasId);
+const ctx = canvas.getContext('2d');
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+window.onload = function() {
+setupCanvas('sigAssistido');
+setupCanvas('sigResponsavel');
+setupCanvas('sigHazaq');
+};
+</script>
+
+</body>
+</html>
