@@ -65,14 +65,13 @@ input[type="text"], input[type="tel"], textarea, select { width: 100%; padding: 
 <p style="font-size: 0.85em; margin-top: 3px; margin-bottom: 8px;">CBO 2515-50 | Sincroterapia Bíblica</p>
 
 <button type="button" class="btn-audio" onclick="toggleAudio()" id="btnAudio">▶️ OUVIR ORIENTAÇÃO</button>
-<audio id="audioPlayer" src="1-audio.mp3"></audio>
 </div>
 
 <!-- Instruções e Pré-requisitos de Ingresso -->
 <div class="requirements-box">
 <h4>📋 Requisitos para Ingressar no Programa de Desenvolvimento Pessoal:</h4>
+<p style="margin: 5px 0; font-weight: bold; color: var(--primary);">Pessoas em Estado de Vulnerabilidade ou Dependência Química e/ou Não Química:</p>
 <ul>
-<h4>Pessoas em Estado de Vulnerabilidade ou Dependência Química e ou Não Química)</h4>
 <li>Passar pela <strong>Anamnese</strong> (preenchimento deste formulário).</li>
 <li>Submeter-se aos Exames:
 <ol>
@@ -196,48 +195,55 @@ input[type="text"], input[type="tel"], textarea, select { width: 100%; padding: 
 </div>
 
 <script>
-// Leitura de Áudio / Sintetizador de Voz
+// Sintetizador de Voz (Áudio)
 let synth = window.speechSynthesis;
-let utterance;
 
 function toggleAudio() {
-if (synth.speaking) {
-synth.cancel();
-document.getElementById('btnAudio').innerText = "▶️ OUVIR ORIENTAÇÃO";
-return;
+    if (synth.speaking) {
+        synth.cancel();
+        document.getElementById('btnAudio').innerText = "▶️ OUVIR ORIENTAÇÃO";
+        return;
+    }
+
+    const texto = "Ficha Cadastral e Anamnese. Programa de Desenvolvimento Pessoal HAZAQ. Gilberto Moreira, Sincroterapeuta. Para ingressar, é necessário passar pela Anamnese, Exame Psicoanalítico e Exame Médico. Menores de idade devem anexar histórico cível e criminal na ficha de matrícula. Maiores de idade também devem anexar as certidões negativas. Preencha seus dados cadastrais, clínicos e confirme o envio.";
+
+    const utterance = new SpeechSynthesisUtterance(texto);
+    utterance.lang = 'pt-BR';
+    utterance.rate = 1.0;
+
+    utterance.onend = () => {
+        document.getElementById('btnAudio').innerText = "▶️ OUVIR ORIENTAÇÃO";
+    };
+
+    synth.speak(utterance);
+    document.getElementById('btnAudio').innerText = "⏸️ PARAR ORIENTAÇÃO";
 }
 
-const texto = "Ficha Cadastral e Anamnese. Programa de Desenvolvimento Pessoal HAZAQ. Gilberto Moreira, Sincroterapeuta. Para ingressar, é necessário passar pela Anamnese, Exame Psicoanalítico e Exame Médico. Menores de idade devem anexar histórico cível e criminal na ficha de matrícula. Maiores de idade também devem anexar as certidões negativas. Preencha seus dados cadastrais, clínicos e confirme o envio.";
-
-utterance = new SpeechSynthesisUtterance(texto);
-utterance.lang = 'pt-BR';
-utterance.rate = 1.0;
-
-utterance.onend = () => {
-document.getElementById('btnAudio').innerText = "▶️ OUVIR ORIENTAÇÃO";
-};
-
-synth.speak(utterance);
-document.getElementById('btnAudio').innerText = "⏸️ PARAR ORIENTAÇÃO";
-}
-
-// Script de Envio para o WhatsApp
+// Envio para o WhatsApp
 document.getElementById('anamneseForm').onsubmit = function(e) {
-e.preventDefault();
-const formData = new FormData(this);
+    e.preventDefault();
+    const formData = new FormData(this);
 
-let mensagem = *FICHA CADASTRAL E ANAMNESE - HAZAQ*%0A%0A +
-*Perfil:* ${formData.get('faixa_etaria')}%0A+Programa:${formData.get('programa')}%0A +
-*Nome:* ${formData.get('nome')}%0A+Endereço:${formData.get('endereco')}%0A +
-*Contato:* ${formData.get('contato')}%0A+Referência/Contatos:${formData.get('referencia_contato')}%0A%0A +
-*--- DADOS DE PERÍCIA CLÍNICA ---*%0A +
-*Remédios:* ${formData.get('medicacoes') || 'Nenhum informado'}%0A+Desparasitação:${formData.get('antiparasitario')}%0A +
-*Qualidade do Sono:* ${formData.get('sono')}/10%0A+Cômodo Chave:${formData.get('comodo_chave') || 'Não informado'}%0A +
-*Autoriza Imagem/Nome:* ${formData.get('autoriza_imagem')}`;
+    let mensagem = `*FICHA CADASTRAL E ANAMNESE - HAZAQ*\n\n` +
+        `*Perfil:* ${formData.get('faixa_etaria')}\n` +
+        `*Programa:* ${formData.get('programa')}\n` +
+        `*Nome:* ${formData.get('nome')}\n` +
+        `*Endereço:* ${formData.get('endereco')}\n` +
+        `*Contato:* ${formData.get('contato')}\n` +
+        `*Referência/Contatos:* ${formData.get('referencia_contato')}\n\n` +
+        `*--- DADOS DE PERÍCIA CLÍNICA ---*\n` +
+        `*Remédios:* ${formData.get('medicacoes') || 'Nenhum informado'}\n` +
+        `*Desparasitação:* ${formData.get('antiparasitario')}\n` +
+        `*Qualidade do Sono:* ${formData.get('sono')}/10\n` +
+        `*Cômodo Chave:* ${formData.get('comodo_chave') || 'Não informado'}\n` +
+        `*Autoriza Imagem/Nome:* ${formData.get('autoriza_imagem')}`;
 
-const url = https://api.whatsapp.com/send?phone=5566984666186&text=${mensagem}`;
-window.open(url, '_blank');
-setTimeout(() => { window.location.href = '2.html'; }, 800);
+    const url = `https://api.whatsapp.com/send?phone=5566984666186&text=${encodeURIComponent(mensagem)}`;
+    window.open(url, '_blank');
+    
+    setTimeout(() => { 
+        window.location.href = '2.html'; 
+    }, 800);
 };
 </script>
 </body>
