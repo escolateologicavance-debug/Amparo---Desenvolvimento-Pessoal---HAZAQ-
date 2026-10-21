@@ -4,10 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Amparo HAZAQ - Estações do Programa</title>
-  
-  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-
   <style>
     body, html {
       margin: 0;
@@ -18,38 +15,21 @@
       background-color: #0f172a;
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
-
-    /* Transição suave de fundo */
-    .bg-landscape {
-      transition: background-image 0.6s ease-in-out;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
   </style>
 </head>
 <body class="flex flex-col md:flex-row h-screen w-screen text-slate-100">
 
-  <!-- ÁREA DA PAISAGEM REALISTA -->
-  <div class="w-full md:w-2/3 h-1/2 md:h-full relative overflow-hidden bg-slate-900">
-    <div id="landscape-bg" class="w-full h-full bg-landscape flex flex-col justify-between p-6 relative">
-      
-      <!-- Gradiente para contraste do texto -->
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/50 pointer-events-none"></div>
+  <!-- ÁREA DA ILUSTRAÇÃO DAS ESTAÇÕES (SVG PURO) -->
+  <div class="w-full md:w-2/3 h-1/2 md:h-full relative bg-slate-950 flex items-center justify-center p-4">
+    <div id="svg-container" class="w-full h-full max-w-2xl max-h-[500px] flex items-center justify-center">
+      <!-- SVG injetado via JS -->
+    </div>
 
-      <!-- Tag Superior da Estação -->
-      <div class="relative z-10">
-        <span id="season-badge" class="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-600/90 text-amber-100 backdrop-blur-md border border-amber-400/40 shadow-lg">
-          Estação 1 — Outono
-        </span>
-      </div>
-
-      <!-- Citação e Reflexão -->
-      <div class="relative z-10 mb-2">
-        <p id="landscape-quote" class="text-sm md:text-base italic text-slate-100 drop-shadow-md max-w-xl bg-slate-950/40 p-3 rounded-lg border border-slate-700/50 backdrop-blur-sm">
-          "O desfolhamento e a desconstrução da negação para encarar a realidade nua."
-        </p>
-      </div>
+    <!-- Tag Superior -->
+    <div class="absolute top-4 left-4 z-10">
+      <span id="season-badge" class="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-600/90 text-amber-100 backdrop-blur-md border border-amber-400/40 shadow-lg">
+        Estação 1 — Outono
+      </span>
     </div>
   </div>
 
@@ -59,7 +39,7 @@
       <div class="text-xs font-bold uppercase tracking-wider text-blue-400 mb-1">Programa HAZAQ</div>
       <h2 id="season-title" class="text-2xl font-black text-white mb-2">Outono</h2>
       <div id="season-months" class="inline-block bg-blue-900/40 text-blue-300 text-xs font-medium px-2.5 py-1 rounded border border-blue-700/50 mb-4">
-        Mêses 1 a 3 — Fundamentação
+        Meses 1 a 3 — Fundamentação
       </div>
       <p id="season-desc" class="text-slate-300 text-sm leading-relaxed mb-6">
         Estação do desfolhamento. O assistido desmantela a negação, despoja-se das falsas defesas e encara a realidade nua para estruturar a mudança.
@@ -73,19 +53,19 @@
       </div>
     </div>
 
-    <!-- BOTÕES DE SELEÇÃO DE ESTAÇÕES -->
+    <!-- BOTÕES DE SELEÇÃO -->
     <div class="pt-6 border-t border-slate-800 mt-4">
       <div class="grid grid-cols-2 gap-2">
-        <button onclick="setSeason('outono')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-amber-600/30 text-amber-300 border border-amber-500/30 hover:bg-amber-600/50 transition flex items-center justify-center gap-1">
+        <button onclick="setSeason('outono')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-amber-600/30 text-amber-300 border border-amber-500/30 hover:bg-amber-600/50 transition">
           🍂 Outono
         </button>
-        <button onclick="setSeason('inverno')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-600/50 transition flex items-center justify-center gap-1">
+        <button onclick="setSeason('inverno')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-600/50 transition">
           ❄️ Inverno
         </button>
-        <button onclick="setSeason('primavera')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/50 transition flex items-center justify-center gap-1">
+        <button onclick="setSeason('primavera')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/50 transition">
           🌸 Primavera
         </button>
-        <button onclick="setSeason('verao')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-yellow-600/30 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-600/50 transition flex items-center justify-center gap-1">
+        <button onclick="setSeason('verao')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-yellow-600/30 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-600/50 transition">
           ☀️ Verão
         </button>
       </div>
@@ -93,42 +73,78 @@
   </div>
 
 <script>
-  // Dados com imagens diretas de alta resolução que não bloqueiam
+  // Ilustrações Artísticas em SVG Estático
+  const svgArt = {
+    outono: `<svg viewBox="0 0 800 500" class="w-full h-full rounded-xl shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="gOut" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#451a03"/><stop offset="100%" stop-color="#0f172a"/></linearGradient></defs>
+      <rect width="800" height="500" fill="url(#gOut)"/>
+      <circle cx="400" cy="200" r="120" fill="#d97706" opacity="0.2"/>
+      <path d="M380 450 Q390 300 400 220 Q410 300 420 450 Z" fill="#78350f"/>
+      <path d="M400 220 C320 180 300 100 400 80 C500 100 480 180 400 220 Z" fill="#b45309" opacity="0.8"/>
+      <path d="M400 180 C350 150 340 90 400 70 C460 90 450 150 400 180 Z" fill="#d97706"/>
+      <path d="M100 450 Q400 430 700 450 L700 500 L100 500 Z" fill="#78350f"/>
+    </svg>`,
+
+    inverno: `<svg viewBox="0 0 800 500" class="w-full h-full rounded-xl shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="gInv" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0284c7"/><stop offset="100%" stop-color="#0f172a"/></linearGradient></defs>
+      <rect width="800" height="500" fill="url(#gInv)"/>
+      <circle cx="400" cy="180" r="140" fill="#e0f2fe" opacity="0.15"/>
+      <path d="M385 450 Q395 280 400 200 Q405 280 415 450 Z" fill="#334155"/>
+      <path d="M400 250 L340 200 M400 220 L450 170 M400 280 L460 240 M400 190 L350 150" stroke="#475569" stroke-width="6" stroke-linecap="round"/>
+      <path d="M100 450 Q400 420 700 450 L700 500 L100 500 Z" fill="#e2e8f0"/>
+    </svg>`,
+
+    primavera: `<svg viewBox="0 0 800 500" class="w-full h-full rounded-xl shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="gPri" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#065f46"/><stop offset="100%" stop-color="#0f172a"/></linearGradient></defs>
+      <rect width="800" height="500" fill="url(#gPri)"/>
+      <circle cx="400" cy="200" r="130" fill="#34d399" opacity="0.2"/>
+      <path d="M380 450 Q390 300 400 210 Q410 300 420 450 Z" fill="#064e3b"/>
+      <circle cx="400" cy="150" r="80" fill="#10b981" opacity="0.9"/>
+      <circle cx="360" cy="130" r="40" fill="#f43f5e" opacity="0.8"/>
+      <circle cx="440" cy="140" r="45" fill="#fb7185" opacity="0.8"/>
+      <circle cx="400" cy="100" r="35" fill="#fda4af" opacity="0.9"/>
+      <path d="M100 450 Q400 430 700 450 L700 500 L100 500 Z" fill="#047857"/>
+    </svg>`,
+
+    verao: `<svg viewBox="0 0 800 500" class="w-full h-full rounded-xl shadow-2xl" xmlns="http://www.w3.org/2000/svg">
+      <defs><linearGradient id="gVer" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#854d0e"/><stop offset="100%" stop-color="#0f172a"/></linearGradient></defs>
+      <rect width="800" height="500" fill="url(#gVer)"/>
+      <circle cx="400" cy="150" r="100" fill="#facc15" opacity="0.4"/>
+      <circle cx="400" cy="150" r="60" fill="#fde047"/>
+      <path d="M380 450 Q390 300 400 230 Q410 300 420 450 Z" fill="#713f12"/>
+      <circle cx="400" cy="180" r="95" fill="#65a30d"/>
+      <circle cx="370" cy="160" r="60" fill="#84cc16"/>
+      <path d="M100 450 Q400 430 700 450 L700 500 L100 500 Z" fill="#4d7c0f"/>
+    </svg>`
+  };
+
   const seasonData = {
     outono: {
       title: "Estação 1: Outono",
       badge: "Estação 1 — Outono",
-      months: "Mêses 1 a 3 — Fundamentação",
+      months: "Meses 1 a 3 — Fundamentação",
       desc: "Estação do desfolhamento. O assistido desmantela a negação, despoja-se das falsas defesas e encara a realidade nua para estruturar a mudança.",
-      quote: '"O desfolhamento e a desconstrução da negação para encarar a realidade nua."',
-      imgUrl: "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 1: Reconhecimento da Realidade", "Mês 2: Fortaleza do Propósito", "Mês 3: Domínio do Pensamento"]
     },
     inverno: {
       title: "Estação 2: Inverno",
       badge: "Estação 2 — Inverno",
-      months: "Mêses 4 a 6 — Reestruturação",
+      months: "Meses 4 a 6 — Reestruturação",
       desc: "Tempo de recolhimento e aprofundamento das raízes. A rotina rígida e a disciplina do corpo sustentam a sobriedade durante a firmeza do processo.",
-      quote: '"Aprofundar raízes em silêncio e firmeza sob a disciplina da rotina."',
-      imgUrl: "https://images.pexels.com/photos/688660/pexels-photo-688660.jpeg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 4: A Gestão do Tempo", "Mês 5: Disciplina do Corpo", "Mês 6: Resiliência nas Provações"]
     },
     primavera: {
       title: "Estação 3: Primavera",
       badge: "Estação 3 — Primavera",
-      months: "Mêses 7 a 9 — Sincronização",
+      months: "Meses 7 a 9 — Sincronização",
       desc: "Renovação e desabrochar. O ambiente é restaurado, a linguagem ganha força positiva e o cérebro aprende a apreciar o valor das pequenas conquistas.",
-      quote: '"O desabrochar de novos ambientes e a reorganização da linguagem."',
-      imgUrl: "https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 7: Poder da Palavra e Confissão", "Mês 8: Ambiente Restaurado", "Mês 9: A Armadilha da Dopamina Barata"]
     },
     verao: {
       title: "Estação 4: Verão",
       badge: "Estação 4 — Verão",
-      months: "Mêses 10 a 12 — Consolidação",
+      months: "Meses 10 a 12 — Consolidação",
       desc: "Maturidade e abundância de luz. O caráter sóbrio está consolidado, permitindo curar feridas, firmar a nova identidade e servir de legado a outros.",
-      quote: '"Consolidação do caráter sob luz plena e prontidão para servir ao próximo."',
-      imgUrl: "https://images.pexels.com/photos/1431463/pexels-photo-1431463.jpeg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 10: Perdão e Reconciliação", "Mês 11: Firmeza na Identidade", "Mês 12: Legado do Cuidado"]
     }
   };
@@ -140,14 +156,12 @@
     document.getElementById('season-badge').innerText = data.badge;
     document.getElementById('season-months').innerText = data.months;
     document.getElementById('season-desc').innerText = data.desc;
-    document.getElementById('season-quote').innerText = data.quote;
 
-    const bgElem = document.getElementById('landscape-bg');
-    bgElem.style.backgroundImage = `url('${data.imgUrl}')`;
+    document.getElementById('svg-container').innerHTML = svgArt[key];
 
     const list = document.getElementById('season-pillars');
     list.innerHTML = data.pillars.map(p => `
-      <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs font-semibold text-slate-200 shadow-sm">
+      <div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200">
         ${p}
       </div>
     `).join('');
