@@ -19,11 +19,12 @@
       font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
-    /* Transição suave entre as imagens de fundo */
+    /* Transição suave de fundo */
     .bg-landscape {
-      transition: background-image 0.8s ease-in-out, opacity 0.5s ease;
+      transition: background-image 0.6s ease-in-out;
       background-size: cover;
       background-position: center;
+      background-repeat: no-repeat;
     }
   </style>
 </head>
@@ -31,21 +32,21 @@
 
   <!-- ÁREA DA PAISAGEM REALISTA -->
   <div class="w-full md:w-2/3 h-1/2 md:h-full relative overflow-hidden bg-slate-900">
-    <!-- Imagem de Fundo Dinâmica -->
     <div id="landscape-bg" class="w-full h-full bg-landscape flex flex-col justify-between p-6 relative">
-      <!-- Gradiente para legibilidade das informações -->
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 pointer-events-none"></div>
+      
+      <!-- Gradiente para contraste do texto -->
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-slate-950/50 pointer-events-none"></div>
 
       <!-- Tag Superior da Estação -->
       <div class="relative z-10">
-        <span id="season-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-600/80 text-amber-100 backdrop-blur-md border border-amber-400/30">
+        <span id="season-badge" class="px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-600/90 text-amber-100 backdrop-blur-md border border-amber-400/40 shadow-lg">
           Estação 1 — Outono
         </span>
       </div>
 
-      <!-- Legenda da Paisagem -->
+      <!-- Citação e Reflexão -->
       <div class="relative z-10 mb-2">
-        <p id="landscape-quote" class="text-sm md:text-base italic text-slate-200 drop-shadow-md max-w-xl">
+        <p id="landscape-quote" class="text-sm md:text-base italic text-slate-100 drop-shadow-md max-w-xl bg-slate-950/40 p-3 rounded-lg border border-slate-700/50 backdrop-blur-sm">
           "O desfolhamento e a desconstrução da negação para encarar a realidade nua."
         </p>
       </div>
@@ -67,7 +68,7 @@
       <div class="space-y-3">
         <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pilares da Temporada</h3>
         <div id="season-pillars" class="space-y-2">
-          <!-- Injetado dinamicamente -->
+          <!-- Injetado via JS -->
         </div>
       </div>
     </div>
@@ -92,7 +93,7 @@
   </div>
 
 <script>
-  // Dados das Estações com Imagens Realistas
+  // Dados com imagens diretas de alta resolução que não bloqueiam
   const seasonData = {
     outono: {
       title: "Estação 1: Outono",
@@ -100,8 +101,7 @@
       months: "Mêses 1 a 3 — Fundamentação",
       desc: "Estação do desfolhamento. O assistido desmantela a negação, despoja-se das falsas defesas e encara a realidade nua para estruturar a mudança.",
       quote: '"O desfolhamento e a desconstrução da negação para encarar a realidade nua."',
-      // Paisagem realista de Outono
-      imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      imgUrl: "https://images.pexels.com/photos/33109/fall-autumn-red-season.jpg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 1: Reconhecimento da Realidade", "Mês 2: Fortaleza do Propósito", "Mês 3: Domínio do Pensamento"]
     },
     inverno: {
@@ -110,8 +110,7 @@
       months: "Mêses 4 a 6 — Reestruturação",
       desc: "Tempo de recolhimento e aprofundamento das raízes. A rotina rígida e a disciplina do corpo sustentam a sobriedade durante a firmeza do processo.",
       quote: '"Aprofundar raízes em silêncio e firmeza sob a disciplina da rotina."',
-      // Paisagem realista de Inverno/Montanha sóbria
-      imgUrl: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80",
+      imgUrl: "https://images.pexels.com/photos/688660/pexels-photo-688660.jpeg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 4: A Gestão do Tempo", "Mês 5: Disciplina do Corpo", "Mês 6: Resiliência nas Provações"]
     },
     primavera: {
@@ -120,8 +119,7 @@
       months: "Mêses 7 a 9 — Sincronização",
       desc: "Renovação e desabrochar. O ambiente é restaurado, a linguagem ganha força positiva e o cérebro aprende a apreciar o valor das pequenas conquistas.",
       quote: '"O desabrochar de novos ambientes e a reorganização da linguagem."',
-      // Paisagem realista de Primavera
-      imgUrl: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=80",
+      imgUrl: "https://images.pexels.com/photos/1166209/pexels-photo-1166209.jpeg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 7: Poder da Palavra e Confissão", "Mês 8: Ambiente Restaurado", "Mês 9: A Armadilha da Dopamina Barata"]
     },
     verao: {
@@ -130,27 +128,23 @@
       months: "Mêses 10 a 12 — Consolidação",
       desc: "Maturidade e abundância de luz. O caráter sóbrio está consolidado, permitindo curar feridas, firmar a nova identidade e servir de legado a outros.",
       quote: '"Consolidação do caráter sob luz plena e prontidão para servir ao próximo."',
-      // Paisagem realista de Verão/Sol
-      imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      imgUrl: "https://images.pexels.com/photos/1431463/pexels-photo-1431463.jpeg?auto=compress&cs=tinysrgb&w=1260",
       pillars: ["Mês 10: Perdão e Reconciliação", "Mês 11: Firmeza na Identidade", "Mês 12: Legado do Cuidado"]
     }
   };
 
   function setSeason(key) {
     const data = seasonData[key];
-    
-    // Atualiza Textos
+
     document.getElementById('season-title').innerText = data.title;
     document.getElementById('season-badge').innerText = data.badge;
     document.getElementById('season-months').innerText = data.months;
     document.getElementById('season-desc').innerText = data.desc;
     document.getElementById('season-quote').innerText = data.quote;
 
-    // Atualiza Imagem de Fundo
     const bgElem = document.getElementById('landscape-bg');
     bgElem.style.backgroundImage = `url('${data.imgUrl}')`;
 
-    // Atualiza Pilares
     const list = document.getElementById('season-pillars');
     list.innerHTML = data.pillars.map(p => `
       <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs font-semibold text-slate-200 shadow-sm">
@@ -159,7 +153,6 @@
     `).join('');
   }
 
-  // Inicializa no Outono ao carregar
   window.onload = function() {
     setSeason('outono');
   };
