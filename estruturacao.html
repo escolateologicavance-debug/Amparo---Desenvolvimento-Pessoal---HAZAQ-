@@ -257,6 +257,26 @@ page-break-before: always;
 </style>
 </head>
 <body>
+<!-- Botão para abrir o 3D -->
+<div style="text-align: center; margin: 20px 0;">
+  <button onclick="abrirModal3D()" style="background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; border: none; padding: 14px 28px; font-size: 1rem; font-weight: bold; border-radius: 30px; cursor: pointer; box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3); transition: transform 0.2s;">
+    🍃 Ver Experiência Interativa 3D das 4 Estações
+  </button>
+</div>
+
+<!-- Modal 3D -->
+<div id="modal3D" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px); z-index: 9999; align-items: center; justify-content: center;">
+  <div style="position: relative; width: 95%; max-width: 1200px; height: 85vh; background: #0f172a; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);">
+    
+    <!-- Botão Fechar -->
+    <button onclick="fecharModal3D()" style="position: absolute; top: 15px; right: 20px; z-index: 10000; background: rgba(255, 255, 255, 0.2); color: white; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center;">
+      ✕
+    </button>
+    
+    <!-- Iframe carregando o estacoes_3d.html -->
+    <iframe src="estacoes_3d.html" style="width: 100%; height: 100%; border: none;"></iframe>
+  </div>
+</div>
 
 <div class="container">
 
@@ -516,6 +536,21 @@ setupCanvas('sigAssistido');
 setupCanvas('sigResponsavel');
 setupCanvas('sigHazaq');
 };
+ function abrirModal3D() {
+  document.getElementById('modal3D').style.display = 'flex';
+}
+
+function fecharModal3D() {
+  document.getElementById('modal3D').style.display = 'none';
+}
+
+// Fechar modal ao pressionar a tecla ESC
+window.addEventListener('keydown', function(event) {
+  if (event.key === 'Escape') {
+    fecharModal3D();
+  }
+});
+
 </script>
 
 </body>
