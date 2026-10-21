@@ -1,209 +1,168 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Amparo HAZAQ - Estações 3D</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amparo HAZAQ - Estações do Programa</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Tailwind CSS & Three.js via CDN -->
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0f172a;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
 
-<style>
-body, html {
-margin: 0;
-padding: 0;
-width: 100%;
-height: 100%;
-overflow: hidden;
-background-color: #0f172a;
-font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-}
-</style>
+    /* Transição suave entre as imagens de fundo */
+    .bg-landscape {
+      transition: background-image 0.8s ease-in-out, opacity 0.5s ease;
+      background-size: cover;
+      background-position: center;
+    }
+  </style>
 </head>
 <body class="flex flex-col md:flex-row h-screen w-screen text-slate-100">
 
-<!-- ÁREA DO CANVAS 3D -->
-<div class="w-full md:w-2/3 h-1/2 md:h-full relative">
-<div id="canvas-container" class="w-full h-full"></div>
-<div class="absolute bottom-4 left-4 bg-slate-950/70 backdrop-blur-sm text-slate-300 text-xs px-3 py-1.5 rounded-full border border-slate-800 pointer-events-none">
-🖱️ Arraste para girar 360° | Scroll para zoom
-</div>
-</div>
+  <!-- ÁREA DA PAISAGEM REALISTA -->
+  <div class="w-full md:w-2/3 h-1/2 md:h-full relative overflow-hidden bg-slate-900">
+    <!-- Imagem de Fundo Dinâmica -->
+    <div id="landscape-bg" class="w-full h-full bg-landscape flex flex-col justify-between p-6 relative">
+      <!-- Gradiente para legibilidade das informações -->
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40 pointer-events-none"></div>
 
-<!-- PAINEL LATERAL INFORMATIVO -->
-<div class="w-full md:w-1/3 h-1/2 md:h-full bg-slate-950/90 border-t md:border-t-0 md:border-l border-slate-800 p-6 flex flex-col justify-between overflow-y-auto">
-<div>
-<div class="text-xs font-bold uppercase tracking-wider text-blue-400 mb-1">Programa HAZAQ 3D</div>
-<h2 id="season-title" class="text-2xl font-black text-white mb-2">Outono</h2>
-<div id="season-months" class="inline-block bg-blue-900/40 text-blue-300 text-xs font-medium px-2.5 py-1 rounded border border-blue-700/50 mb-4">
-Mêses 1 a 3
-</div>
-<p id="season-desc" class="text-slate-300 text-sm leading-relaxed mb-6">
-Estação do desfolhamento. O assistido desmantela a negação e encara a realidade nua sem subterfúgios.
-</p>
+      <!-- Tag Superior da Estação -->
+      <div class="relative z-10">
+        <span id="season-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-600/80 text-amber-100 backdrop-blur-md border border-amber-400/30">
+          Estação 1 — Outono
+        </span>
+      </div>
 
-<div class="space-y-3">
-<h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pilares da Temporada</h3>
-<div id="season-pillars" class="space-y-2">
-<!-- Injetado dinamicamente -->
-</div>
-</div>
-</div>
+      <!-- Legenda da Paisagem -->
+      <div class="relative z-10 mb-2">
+        <p id="landscape-quote" class="text-sm md:text-base italic text-slate-200 drop-shadow-md max-w-xl">
+          "O desfolhamento e a desconstrução da negação para encarar a realidade nua."
+        </p>
+      </div>
+    </div>
+  </div>
 
-<!-- BOTÕES DE SELEÇÃO DE ESTAÇÕES -->
-<div class="pt-6 border-t border-slate-800/80 mt-4">
-<div class="grid grid-cols-2 gap-2">
-<button onclick="setSeason('outono')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-amber-600/30 text-amber-300 border border-amber-500/30 hover:bg-amber-600/50 transition flex items-center justify-center gap-1">
-🍂 Outono
-</button>
-<button onclick="setSeason('inverno')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-600/50 transition flex items-center justify-center gap-1">
-❄️ Inverno
-</button>
-<button onclick="setSeason('primavera')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/50 transition flex items-center justify-center gap-1">
-🌸 Primavera
-</button>
-<button onclick="setSeason('verao')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-yellow-600/30 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-600/50 transition flex items-center justify-center gap-1">
-☀️ Verão
-</button>
-</div>
-</div>
-</div>
+  <!-- PAINEL LATERAL INFORMATIVO -->
+  <div class="w-full md:w-1/3 h-1/2 md:h-full bg-slate-950/95 border-t md:border-t-0 md:border-l border-slate-800 p-6 flex flex-col justify-between overflow-y-auto">
+    <div>
+      <div class="text-xs font-bold uppercase tracking-wider text-blue-400 mb-1">Programa HAZAQ</div>
+      <h2 id="season-title" class="text-2xl font-black text-white mb-2">Outono</h2>
+      <div id="season-months" class="inline-block bg-blue-900/40 text-blue-300 text-xs font-medium px-2.5 py-1 rounded border border-blue-700/50 mb-4">
+        Mêses 1 a 3 — Fundamentação
+      </div>
+      <p id="season-desc" class="text-slate-300 text-sm leading-relaxed mb-6">
+        Estação do desfolhamento. O assistido desmantela a negação, despoja-se das falsas defesas e encara a realidade nua para estruturar a mudança.
+      </p>
+
+      <div class="space-y-3">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider">Pilares da Temporada</h3>
+        <div id="season-pillars" class="space-y-2">
+          <!-- Injetado dinamicamente -->
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTÕES DE SELEÇÃO DE ESTAÇÕES -->
+    <div class="pt-6 border-t border-slate-800 mt-4">
+      <div class="grid grid-cols-2 gap-2">
+        <button onclick="setSeason('outono')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-amber-600/30 text-amber-300 border border-amber-500/30 hover:bg-amber-600/50 transition flex items-center justify-center gap-1">
+          🍂 Outono
+        </button>
+        <button onclick="setSeason('inverno')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-cyan-600/30 text-cyan-300 border border-cyan-500/30 hover:bg-cyan-600/50 transition flex items-center justify-center gap-1">
+          ❄️ Inverno
+        </button>
+        <button onclick="setSeason('primavera')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-emerald-600/30 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-600/50 transition flex items-center justify-center gap-1">
+          🌸 Primavera
+        </button>
+        <button onclick="setSeason('verao')" class="py-2.5 px-3 text-xs font-semibold rounded-lg bg-yellow-600/30 text-yellow-300 border border-yellow-500/30 hover:bg-yellow-600/50 transition flex items-center justify-center gap-1">
+          ☀️ Verão
+        </button>
+      </div>
+    </div>
+  </div>
 
 <script>
-let scene, camera, renderer, controls, treeGroup, foliageMesh, particles, grassGroup;
+  // Dados das Estações com Imagens Realistas
+  const seasonData = {
+    outono: {
+      title: "Estação 1: Outono",
+      badge: "Estação 1 — Outono",
+      months: "Mêses 1 a 3 — Fundamentação",
+      desc: "Estação do desfolhamento. O assistido desmantela a negação, despoja-se das falsas defesas e encara a realidade nua para estruturar a mudança.",
+      quote: '"O desfolhamento e a desconstrução da negação para encarar a realidade nua."',
+      // Paisagem realista de Outono
+      imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      pillars: ["Mês 1: Reconhecimento da Realidade", "Mês 2: Fortaleza do Propósito", "Mês 3: Domínio do Pensamento"]
+    },
+    inverno: {
+      title: "Estação 2: Inverno",
+      badge: "Estação 2 — Inverno",
+      months: "Mêses 4 a 6 — Reestruturação",
+      desc: "Tempo de recolhimento e aprofundamento das raízes. A rotina rígida e a disciplina do corpo sustentam a sobriedade durante a firmeza do processo.",
+      quote: '"Aprofundar raízes em silêncio e firmeza sob a disciplina da rotina."',
+      // Paisagem realista de Inverno/Montanha sóbria
+      imgUrl: "https://images.unsplash.com/photo-1486870591958-9b9d0d1dda99?auto=format&fit=crop&w=1200&q=80",
+      pillars: ["Mês 4: A Gestão do Tempo", "Mês 5: Disciplina do Corpo", "Mês 6: Resiliência nas Provações"]
+    },
+    primavera: {
+      title: "Estação 3: Primavera",
+      badge: "Estação 3 — Primavera",
+      months: "Mêses 7 a 9 — Sincronização",
+      desc: "Renovação e desabrochar. O ambiente é restaurado, a linguagem ganha força positiva e o cérebro aprende a apreciar o valor das pequenas conquistas.",
+      quote: '"O desabrochar de novos ambientes e a reorganização da linguagem."',
+      // Paisagem realista de Primavera
+      imgUrl: "https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1200&q=80",
+      pillars: ["Mês 7: Poder da Palavra e Confissão", "Mês 8: Ambiente Restaurado", "Mês 9: A Armadilha da Dopamina Barata"]
+    },
+    verao: {
+      title: "Estação 4: Verão",
+      badge: "Estação 4 — Verão",
+      months: "Mêses 10 a 12 — Consolidação",
+      desc: "Maturidade e abundância de luz. O caráter sóbrio está consolidado, permitindo curar feridas, firmar a nova identidade e servir de legado a outros.",
+      quote: '"Consolidação do caráter sob luz plena e prontidão para servir ao próximo."',
+      // Paisagem realista de Verão/Sol
+      imgUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      pillars: ["Mês 10: Perdão e Reconciliação", "Mês 11: Firmeza na Identidade", "Mês 12: Legado do Cuidado"]
+    }
+  };
 
-const seasonData = {
-outono: {
-title: "Estação 1: Outono",
-months: "Mêses 1 a 3 — Fundamentação",
-desc: "Estação do desfolhamento. O assistido desmantela a negação, despoja-se das falsas defesas e encara a realidade nua para estruturar a mudança.",
-bg: 0x2b1810, foliageColor: 0xd97706, grassColor: 0xb45309,
-pillars: ["Mês 1: Reconhecimento da Realidade", "Mês 2: Fortaleza do Propósito", "Mês 3: Domínio do Pensamento"]
-},
-inverno: {
-title: "Estação 2: Inverno",
-months: "Mêses 4 a 6 — Reestruturação",
-desc: "Tempo de recolhimento e aprofundamento das raízes. A rotina rígida e a disciplina do corpo sustentam a sobriedade durante o frio das provações.",
-bg: 0x0f172a, foliageColor: 0x38bdf8, grassColor: 0x475569,
-pillars: ["Mês 4: A Gestão do Tempo", "Mês 5: Disciplina do Corpo", "Mês 6: Resiliência nas Provações"]
-},
-primavera: {
-title: "Estação 3: Primavera",
-months: "Mêses 7 a 9 — Sincronização",
-desc: "Renovação e desabrochar. O ambiente é restaurado, a linguagem ganha força positiva e o cérebro aprende a apreciar o valor das pequenas conquistas.",
-bg: 0x064e3b, foliageColor: 0x34d399, grassColor: 0x059669,
-pillars: ["Mês 7: Poder da Palavra e Confissão", "Mês 8: Ambiente Restaurado", "Mês 9: A Armadilha da Dopamina Barata"]
-},
-verao: {
-title: "Estação 4: Verão",
-months: "Mêses 10 a 12 — Consolidação",
-desc: "Maturidade e abundância de luz. O caráter sóbrio está consolidado, permitindo curar feridas, firmar a nova identidade e servir de legado a outros.",
-bg: 0x451a03, foliageColor: 0xfacc15, grassColor: 0x65a30d,
-pillars: ["Mês 10: Perdão e Reconciliação", "Mês 11: Firmeza na Identidade", "Mês 12: Legado do Cuidado"]
-}
-};
+  function setSeason(key) {
+    const data = seasonData[key];
+    
+    // Atualiza Textos
+    document.getElementById('season-title').innerText = data.title;
+    document.getElementById('season-badge').innerText = data.badge;
+    document.getElementById('season-months').innerText = data.months;
+    document.getElementById('season-desc').innerText = data.desc;
+    document.getElementById('season-quote').innerText = data.quote;
 
-function init3D() {
-const container = document.getElementById('canvas-container');
-scene = new THREE.Scene();
-scene.background = new THREE.Color(0x2b1810);
+    // Atualiza Imagem de Fundo
+    const bgElem = document.getElementById('landscape-bg');
+    bgElem.style.backgroundImage = `url('${data.imgUrl}')`;
 
-camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-camera.position.set(0, 4, 12);
+    // Atualiza Pilares
+    const list = document.getElementById('season-pillars');
+    list.innerHTML = data.pillars.map(p => `
+      <div class="p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs font-semibold text-slate-200 shadow-sm">
+        ${p}
+      </div>
+    `).join('');
+  }
 
-renderer = new THREE.WebGLRenderer({ antialias: true });
-renderer.setSize(container.clientWidth, container.clientHeight);
-renderer.setPixelRatio(window.devicePixelRatio);
-container.appendChild(renderer.domElement);
-
-controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.maxPolarAngle = Math.PI / 2 - 0.05;
-
-// Iluminação
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-scene.add(ambientLight);
-const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
-dirLight.position.set(5, 10, 7);
-scene.add(dirLight);
-
-// Árvore 3D
-treeGroup = new THREE.Group();
-
-// Tronco
-const trunkGeo = new THREE.CylinderGeometry(0.3, 0.6, 3.5, 8);
-const trunkMat = new THREE.MeshStandardMaterial({ color: 0x3d2314, roughness: 0.9 });
-const trunk = new THREE.Mesh(trunkGeo, trunkMat);
-trunk.position.y = 1.75;
-treeGroup.add(trunk);
-
-// Copa da Árvore
-const folGeo = new THREE.DodecahedronGeometry(1.8, 1);
-const folMat = new THREE.MeshStandardMaterial({ color: 0xd97706, roughness: 0.6, flatShading: true });
-foliageMesh = new THREE.Mesh(folGeo, folMat);
-foliageMesh.position.y = 3.8;
-treeGroup.add(foliageMesh);
-
-// Terreno
-const groundGeo = new THREE.CylinderGeometry(3.5, 3.8, 0.4, 16);
-const groundMat = new THREE.MeshStandardMaterial({ color: 0xb45309, roughness: 0.9 });
-grassGroup = new THREE.Mesh(groundGeo, groundMat);
-grassGroup.position.y = -0.2;
-treeGroup.add(grassGroup);
-
-scene.add(treeGroup);
-
-// Partículas
-const partGeo = new THREE.BufferGeometry();
-const count = 150;
-const pos = new Float32Array(count * 3);
-for(let i=0; i<count*3; i+=3){
-pos[i] = (Math.random()-0.5)*8;
-pos[i+1] = Math.random()*5;
-pos[i+2] = (Math.random()-0.5)*8;
-}
-partGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
-const partMat = new THREE.PointsMaterial({ size: 0.08, color: 0xfbbf24, transparent: true, opacity: 0.7 });
-particles = new THREE.Points(partGeo, partMat);
-scene.add(particles);
-
-function animate() {
-requestAnimationFrame(animate);
-treeGroup.rotation.y += 0.003;
-particles.rotation.y += 0.001;
-controls.update();
-renderer.render(scene, camera);
-}
-animate();
-
-window.addEventListener('resize', () => {
-camera.aspect = container.clientWidth / container.clientHeight;
-camera.updateProjectionMatrix();
-renderer.setSize(container.clientWidth, container.clientHeight);
-});
-
-setSeason('outono');
-}
-
-function setSeason(key) {
-const data = seasonData[key];
-document.getElementById('season-title').innerText = data.title;
-document.getElementById('season-months').innerText = data.months;
-document.getElementById('season-desc').innerText = data.desc;
-
-const list = document.getElementById('season-pillars');
-list.innerHTML = data.pillars.map(p => &lt;div class="p-2.5 rounded-lg bg-slate-900 border border-slate-800 text-xs font-semibold text-slate-200"&gt; ${p} &lt;/div&gt;).join('');
-
-if (scene) {
-scene.background.setHex(data.bg);
-foliageMesh.material.color.setHex(data.foliageColor);
-grassGroup.material.color.setHex(data.grassColor);
-}
-}
-
-window.onload = init3D;
+  // Inicializa no Outono ao carregar
+  window.onload = function() {
+    setSeason('outono');
+  };
 </script>
 
 </body>
