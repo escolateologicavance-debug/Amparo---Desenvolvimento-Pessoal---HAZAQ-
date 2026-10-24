@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amparo HAZAQ - Pedido de Avaliação Médica</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0d1b2a">
+<style>
+:root {
+--primary-color: #0b1c3d;
+--secondary-color: #1b263b;
+--accent-color: #415a77;
+--whatsapp-color: #25d366;
+--bg-color: #f8fafc;
+--card-bg: #ffffff;
+--text-color: #1f2937;
+--border-color: #cbd5e1;
+}
+
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: var(--bg-color);
+color: var(--text-color);
+margin: 0;
+padding: 0;
+line-height: 1.8;
+}
+
+header {
+background-color: var(--primary-color);
+color: white;
+text-align: center;
+padding: 30px 20px;
+box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.logo-container {
+max-width: 140px;
+margin: 0 auto 15px auto;
+}
+
+.logo-container img {
+width: 100%;
+height: auto;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+h1 {
+font-size: 1.5rem;
+margin: 10px 0 5px 0;
+letter-spacing: 0.5px;
+}
+
+p.subtitle {
+font-size: 0.95rem;
+color: #cbd5e1;
+margin: 0 auto;
+max-width: 700px;
+text-align: center;
+line-height: 1.5;
+}
+
+.container {
+max-width: 850px;
+margin: 40px auto;
+padding: 40px;
+background: var(--card-bg);
+border-radius: 10px;
+box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+border: 1px solid #e2e8f0;
+}
+
+fieldset {
+border: 1px solid var(--border-color);
+border-radius: 6px;
+padding: 20px;
+margin-bottom: 25px;
+background-color: #fbfbfc;
+}
+
+legend {
+font-weight: bold;
+color: var(--primary-color);
+padding: 0 10px;
+font-size: 1.1rem;
+text-transform: uppercase;
+}
+
+.form-group {
+margin-bottom: 15px;
+}
+
+.row {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+}
+
+.col {
+flex: 1;
+min-width: 200px;
+}
+
+.col-3 {
+flex: 3;
+min-width: 300px;
+}
+
+label {
+display: block;
+margin-bottom: 5px;
+font-weight: 600;
+font-size: 14px;
+color: var(--primary-color);
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+width: 100%;
+padding: 10px;
+border: 1px solid var(--border-color);
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 14px;
+transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+border-color: var(--accent-color);
+outline: none;
+}
+
+.radio-checkbox-group {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+padding-top: 5px;
+}
+
+.radio-item {
+display: flex;
+align-items: center;
+gap: 8px;
+font-size: 14px;
+cursor: pointer;
+}
+
+.radio-item input {
+cursor: pointer;
+transform: scale(1.1);
+}
+
+textarea {
+resize: vertical;
+min-height: 90px;
+}
+
+.btn-container {
+text-align: center;
+margin-top: 30px;
+}
+
+button {
+background-color: var(--whatsapp-color);
+color: white;
+border: none;
+padding: 14px 35px;
+font-size: 16px;
+font-weight: bold;
+border-radius: 6px;
+cursor: pointer;
+transition: background 0.2s, transform 0.1s;
+box-shadow: 0 4px 10px rgba(37,211,102,0.3);
+}
+
+button:hover {
+background-color: #1ebd59;
+transform: translateY(-1px);
+}
+
+footer {
+text-align: center;
+padding: 30px;
+font-size: 0.9rem;
+color: #64748b;
+margin-top: 60px;
+border-top: 1px solid var(--border-color);
+}
+
+@media (max-width: 600px) {
+.row {
+flex-direction: column;
+gap: 0;
+}
+body {
+padding: 10px;
+}
+.container {
+padding: 20px;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo-container">
+<img src="logo-192.png" alt="Amparo HAZAQ">
+</div>
+<h1>Amparo HAZAQ</h1>
+<p class="subtitle">Programa de Desenvolvimento Pessoal voltado para auxiliar pessoas em estado de vulnerabilidade social. Este pedido de avaliação médica tem por finalidade subsidiar a Administração com o status clínico do(a) ingressante.</p>
+</header>
+
+<div class="container">
+<form id="formPedidoMedico" onsubmit="enviarWhatsAppMedico(event)">
+
+<!-- BLOCO 1: IDENTIFICAÇÃO DO INGRESSANTE -->
+<fieldset>
+<legend>1. Identificação do(a) Ingressante</legend>
+<div class="row">
+<div class="col-3 form-group">
+<label for="nome_assistido">Nome Completo (ou alcunha):</label>
+<input type="text" id="nome_assistido" placeholder="Digite o nome completo" required>
+</div>
+<div class="col form-group">
+<label for="data_avaliacao">Data da Solicitação:</label>
+<input type="date" id="data_avaliacao" required>
+</div>
+</div>
+<div class="row">
+<div class="col form-group">
+<label for="documento_assistido">Documento (RG/CPF se houver):</label>
+<input type="text" id="documento_assistido" placeholder="Documentação disponível">
+</div>
+<div class="col form-group">
+<label for="responsavel_triagem">Avaliador / Responsável:</label>
+<input type="text" id="responsavel_triagem" placeholder="Nome do responsável">
+</div>
+</div>
+</fieldset>
+
+<!-- BLOCO 2: REQUISIÇÃO DE AVALIAÇÃO CLÍNICA -->
+<fieldset>
+<legend>2. Requisição de Parecer Clínico</legend>
+<p style="font-size: 0.95rem; text-align: justify; margin-bottom: 20px; color: #475569;">
+Solicitamos ao(à) Doutor(a) a devida avaliação clínica do(a) paciente acima citado(a), visando atestar suas condições gerais de saúde, aptidão para integração no programa de acolhimento e o levantamento de eventuais restrições físicas ou medicamentosas.
+</p>
+
+<div class="form-group">
+<label for="queixas_relatadas">Queixas ou Condições Prévias Relatadas na Triagem:</label>
+<textarea id="queixas_relatadas" placeholder="Descreva hipertensão, diabetes, uso de medicamentos contínuos ou sintomas relatados..."></textarea>
+</div>
+</fieldset>
+
+<!-- BLOCO 3: PARECER DO PROFISSIONAL DE SAÚDE -->
+<fieldset>
+<legend>3. Parecer e Conclusão Médica (Preenchimento do Profissional)</legend>
+
+<div class="form-group">
+<label>O(A) paciente apresenta condições clínicas para integração no programa?</label>
+<div class="radio-checkbox-group">
+<label class="radio-item"><input type="radio" name="aptidao_clinica" value="Apto" required> Apto(a) para acolhimento e atividades</label>
+<label class="radio-item"><input type="radio" name="aptidao_clinica" value="Apto com Restrições"> Apto(a) com restrições (especificar abaixo)</label>
+<label class="radio-item"><input type="radio" name="aptidao_clinica" value="Inapto Temporário"> Inapto(a) temporariamente / Necessita encaminhamento</label>
+</div>
+</div>
+
+<div class="form-group">
+<label for="restricoes_medicamentos">Restrições, Cuidados Especiais ou Prescrições:</label>
+<textarea id="restricoes_medicamentos" placeholder="Informe restrições alimentares, restrições de esforço ou medicamentos prescritos..."></textarea>
+</div>
+
+<div class="row">
+<div class="col-3 form-group">
+<label for="nome_medico">Nome do(a) Médico(a) / CRM:</label>
+<input type="text" id="nome_medico" placeholder="Nome e CRM do profissional">
+</div>
+<div class="col form-group">
+<label for="data_parecer">Data da Avaliação Médica:</label>
+<input type="date" id="data_parecer">
+</div>
+</div>
+</fieldset>
+
+<div class="btn-container">
+<button type="submit">Enviar Pedido / Parecer para o WhatsApp</button>
+</div>
+</form>
+</div>
+
+<footer>
+<p>© 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
+</footer>
+
+<script>
+function enviarWhatsAppMedico(event) {
+event.preventDefault();
+
+// Capturando dados do formulário
+const nome = document.getElementById('nome_assistido').value;
+const dataSol = document.getElementById('data_avaliacao').value || 'Não informada';
+const doc = document.getElementById('documento_assistido').value || 'Não informado';
+const responsavel = document.getElementById('responsavel_triagem').value || 'Não informado';
+const queixas = document.getElementById('queixas_relatadas').value || 'Nenhuma relatada';
+const aptidao = document.querySelector('input[name="aptidao_clinica"]:checked')?.value || 'Não informado';
+const restricoes = document.getElementById('restricoes_medicamentos').value || 'Nenhuma informada';
+const medico = document.getElementById('nome_medico').value || 'Não preenchido';
+const dataParecer = document.getElementById('data_parecer').value || 'Não informada';
+
+// Montando mensagem formatada para o WhatsApp
+let textoMsg = "AMPARO HAZAQ - PEDIDO / PARECER MÉDICO\n\n";
+textoMsg += *1. IDENTIFICAÇÃO*\n;
+textoMsg += • Assistido: ${nome}\n; textoMsg +=• Data Solicitação: ${dataSol}\n;
+textoMsg += • Documento: ${doc}\n; textoMsg +=• Responsável Triagem: ${responsavel}\n\n;
+
+textoMsg += *2. HISTÓRICO / QUEIXAS RELATADAS*\n;
+textoMsg += ${queixas}\n\n`;
+
+textoMsg += *3. PARECER CLÍNICO*\n;
+textoMsg += • Aptidão:${aptidao}\n; textoMsg +=• Restrições/Prescrições: latex
+{restricoes}\n`; textoMsg += `• Médico(a) / CRM: 
+
+{medico}\n; textoMsg +=• Data do Parecer: ${dataParecer};
+
+const numeroWhats = "5566984666186";
+let urlFinal = "";
+
+if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
+urlFinal = whatsapp://send?phone=${numeroWhats}&text=latex
+{encodeURIComponent(textoMsg)}`; } else { urlFinal = `https://web.whatsapp.com/send?phone=
+
+{numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
+}
+
+window.location.href = urlFinal;
+}
+</script>
+
+</body>
+</html>
