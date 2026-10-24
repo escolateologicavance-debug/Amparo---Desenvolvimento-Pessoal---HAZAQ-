@@ -12,6 +12,7 @@
 --secondary-color: #1b263b;
 --accent-color: #415a77;
 --whatsapp-color: #25d366;
+--pdf-color: #d9534f;
 --bg-color: #f8fafc;
 --card-bg: #ffffff;
 --text-color: #1f2937;
@@ -162,26 +163,53 @@ min-height: 90px;
 }
 
 .btn-container {
-text-align: center;
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+justify-content: center;
 margin-top: 30px;
 }
 
 button {
-background-color: var(--whatsapp-color);
 color: white;
 border: none;
-padding: 14px 35px;
-font-size: 16px;
+padding: 12px 22px;
+font-size: 15px;
 font-weight: bold;
 border-radius: 6px;
 cursor: pointer;
 transition: background 0.2s, transform 0.1s;
-box-shadow: 0 4px 10px rgba(37,211,102,0.3);
 }
 
 button:hover {
-background-color: #1ebd59;
 transform: translateY(-1px);
+}
+
+.btn-whatsapp {
+background-color: var(--whatsapp-color);
+box-shadow: 0 4px 10px rgba(37,211,102,0.3);
+}
+
+.btn-whatsapp:hover {
+background-color: #1ebd59;
+}
+
+.btn-pdf {
+background-color: var(--pdf-color);
+box-shadow: 0 4px 10px rgba(217,83,79,0.3);
+}
+
+.btn-pdf:hover {
+background-color: #c9302c;
+}
+
+.btn-pdf-blank {
+background-color: var(--secondary-color);
+box-shadow: 0 4px 10px rgba(27,38,59,0.3);
+}
+
+.btn-pdf-blank:hover {
+background-color: #0b1c3d;
 }
 
 footer {
@@ -203,6 +231,51 @@ padding: 10px;
 }
 .container {
 padding: 20px;
+}
+.btn-container {
+flex-direction: column;
+}
+button {
+width: 100%;
+}
+}
+
+/* REGRAS EXCLUSIVAS PARA A IMPRESSÃO / SALVAR EM PDF */
+@media print {
+body {
+background: #ffffff;
+color: #000000;
+padding: 0;
+margin: 0;
+}
+header, footer, .btn-container {
+display: none !important;
+}
+.container {
+border: none;
+box-shadow: none;
+padding: 0;
+margin: 0;
+width: 100%;
+max-width: 100%;
+}
+fieldset {
+border: 1px solid #000;
+background: #fff;
+page-break-inside: avoid;
+}
+legend {
+color: #000;
+}
+input, textarea {
+border: none !important;
+border-bottom: 1px solid #000 !important;
+border-radius: 0 !important;
+background: transparent !important;
+padding: 4px 0 !important;
+}
+textarea {
+min-height: 60px;
 }
 }
 </style>
@@ -265,7 +338,7 @@ padding: 20px;
             <div class="form-group">
                 <label>O(A) paciente apresenta condições psíquicas para integração no programa?</label>
                 <div class="radio-checkbox-group">
-                    <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto" required> Apto(a) para acolhimento e atividades</label>
+                    <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto"> Apto(a) para acolhimento e atividades</label>
                     <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto com Acompanhamento"> Apto(a) com acompanhamento psicanalítico contínuo</label>
                     <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Inapto Temporário"> Inapto(a) temporariamente / Necessita suporte intensivo</label>
                 </div>
@@ -288,8 +361,11 @@ padding: 20px;
             </div>
         </fieldset>
 
+        <!-- BOTÕES DE AÇÃO -->
         <div class="btn-container">
-            <button type="submit">Enviar Pedido / Parecer para o WhatsApp</button>
+            <button type="submit" class="btn-whatsapp">📲 Enviar p/ WhatsApp</button>
+            <button type="button" onclick="gerarPDFPreenchido()" class="btn-pdf">📄 Salvar PDF (Preenchido)</button>
+            <button type="button" onclick="gerarPDFEmBranco()" class="btn-pdf-blank">📝 Salvar PDF (Em Branco)</button>
         </div>
     </form>
 </div>
@@ -299,6 +375,7 @@ padding: 20px;
 </footer>
 
 <script>
+// ENVIO VIA WHATSAPP
 function enviarWhatsAppPsicologico(event) {
     event.preventDefault();
 
@@ -332,6 +409,18 @@ function enviarWhatsAppPsicologico(event) {
     const urlFinal = `https://api.whatsapp.com/send?phone=${numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
 
     window.location.href = urlFinal;
+}
+
+// IMPRIMIR / SALVAR PDF PREENCHIDO
+function gerarPDFPreenchido() {
+    window.print();
+}
+
+// IMPRIMIR / SALVAR PDF EM BRANCO
+function gerarPDFEmBranco() {
+    const form = document.getElementById('formPedidoPsicologico');
+    form.reset();
+    window.print();
 }
 </script>
 
