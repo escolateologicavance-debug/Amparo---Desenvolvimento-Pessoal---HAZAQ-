@@ -210,135 +210,128 @@ padding: 20px;
 <body>
 
 <header>
-<div class="logo-container">
-<img src="logo-192.png" alt="Amparo HAZAQ">
-</div>
-<h1>Amparo HAZAQ</h1>
-<p class="subtitle">Programa de Desenvolvimento Pessoal voltado para auxiliar pessoas em estado de vulnerabilidade social. Este pedido de avaliação médica tem por finalidade subsidiar a Administração com o status clínico do(a) ingressante.</p>
+    <div class="logo-container">
+        <img src="logo-192.png" alt="Amparo HAZAQ">
+    </div>
+    <h1>Amparo HAZAQ</h1>
+    <p class="subtitle">Programa de Desenvolvimento Pessoal voltado para auxiliar pessoas em estado de vulnerabilidade social. Este pedido de avaliação médica tem por finalidade subsidiar a Administração com o status clínico do(a) ingressante.</p>
 </header>
 
 <div class="container">
-<form id="formPedidoMedico" onsubmit="enviarWhatsAppMedico(event)">
+    <form id="formPedidoMedico" onsubmit="enviarWhatsAppMedico(event)">
 
-<!-- BLOCO 1: IDENTIFICAÇÃO DO INGRESSANTE -->
-<fieldset>
-<legend>1. Identificação do(a) Ingressante</legend>
-<div class="row">
-<div class="col-3 form-group">
-<label for="nome_assistido">Nome Completo (ou alcunha):</label>
-<input type="text" id="nome_assistido" placeholder="Digite o nome completo" required>
-</div>
-<div class="col form-group">
-<label for="data_avaliacao">Data da Solicitação:</label>
-<input type="date" id="data_avaliacao" required>
-</div>
-</div>
-<div class="row">
-<div class="col form-group">
-<label for="documento_assistido">Documento (RG/CPF se houver):</label>
-<input type="text" id="documento_assistido" placeholder="Documentação disponível">
-</div>
-<div class="col form-group">
-<label for="responsavel_triagem">Avaliador / Responsável:</label>
-<input type="text" id="responsavel_triagem" placeholder="Nome do responsável">
-</div>
-</div>
-</fieldset>
+        <!-- BLOCO 1: IDENTIFICAÇÃO DO INGRESSANTE -->
+        <fieldset>
+            <legend>1. Identificação do(a) Ingressante</legend>
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label for="nome_assistido">Nome Completo (ou alcunha):</label>
+                    <input type="text" id="nome_assistido" placeholder="Digite o nome completo" required>
+                </div>
+                <div class="col form-group">
+                    <label for="data_avaliacao">Data da Solicitação:</label>
+                    <input type="date" id="data_avaliacao" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label for="documento_assistido">Documento (RG/CPF se houver):</label>
+                    <input type="text" id="documento_assistido" placeholder="Documentação disponível">
+                </div>
+                <div class="col form-group">
+                    <label for="responsavel_triagem">Avaliador / Responsável:</label>
+                    <input type="text" id="responsavel_triagem" placeholder="Nome do responsável">
+                </div>
+            </div>
+        </fieldset>
 
-<!-- BLOCO 2: REQUISIÇÃO DE AVALIAÇÃO CLÍNICA -->
-<fieldset>
-<legend>2. Requisição de Parecer Clínico</legend>
-<p style="font-size: 0.95rem; text-align: justify; margin-bottom: 20px; color: #475569;">
-Solicitamos ao(à) Doutor(a) a devida avaliação clínica do(a) paciente acima citado(a), visando atestar suas condições gerais de saúde, aptidão para integração no programa de acolhimento e o levantamento de eventuais restrições físicas ou medicamentosas.
-</p>
+        <!-- BLOCO 2: REQUISIÇÃO DE AVALIAÇÃO CLÍNICA -->
+        <fieldset>
+            <legend>2. Requisição de Parecer Clínico</legend>
+            <p style="font-size: 0.95rem; text-align: justify; margin-bottom: 20px; color: #475569;">
+                Solicitamos ao(à) Doutor(a) a devida avaliação clínica do(a) paciente acima citado(a), visando atestar suas condições gerais de saúde, aptidão para integração no programa de acolhimento e o levantamento de eventuais restrições físicas ou medicamentosas.
+            </p>
 
-<div class="form-group">
-<label for="queixas_relatadas">Queixas ou Condições Prévias Relatadas na Triagem:</label>
-<textarea id="queixas_relatadas" placeholder="Descreva hipertensão, diabetes, uso de medicamentos contínuos ou sintomas relatados..."></textarea>
-</div>
-</fieldset>
+            <div class="form-group">
+                <label for="queixas_relatadas">Queixas ou Condições Prévias Relatadas na Triagem:</label>
+                <textarea id="queixas_relatadas" placeholder="Descreva hipertensão, diabetes, uso de medicamentos contínuos ou sintomas relatados..."></textarea>
+            </div>
+        </fieldset>
 
-<!-- BLOCO 3: PARECER DO PROFISSIONAL DE SAÚDE -->
-<fieldset>
-<legend>3. Parecer e Conclusão Médica (Preenchimento do Profissional)</legend>
+        <!-- BLOCO 3: PARECER DO PROFISSIONAL DE SAÚDE -->
+        <fieldset>
+            <legend>3. Parecer e Conclusão Médica (Preenchimento do Profissional)</legend>
+            
+            <div class="form-group">
+                <label>O(A) paciente apresenta condições clínicas para integração no programa?</label>
+                <div class="radio-checkbox-group">
+                    <label class="radio-item"><input type="radio" name="aptidao_clinica" value="Apto" required> Apto(a) para acolhimento e atividades</label>
+                    <label class="radio-item"><input type="radio" name="aptidao_clinica" value="Apto com Restrições"> Apto(a) com restrições (especificar abaixo)</label>
+                    <label class="radio-item"><input type="radio" name="aptidao_clinica" value="Inapto Temporário"> Inapto(a) temporariamente / Necessita encaminhamento</label>
+                </div>
+            </div>
 
-<div class="form-group">
-<label>O(A) paciente apresenta condições clínicas para integração no programa?</label>
-<div class="radio-checkbox-group">
-<label class="radio-item"><input type="radio" name="aptidao_clinica" value="Apto" required> Apto(a) para acolhimento e atividades</label>
-<label class="radio-item"><input type="radio" name="aptidao_clinica" value="Apto com Restrições"> Apto(a) com restrições (especificar abaixo)</label>
-<label class="radio-item"><input type="radio" name="aptidao_clinica" value="Inapto Temporário"> Inapto(a) temporariamente / Necessita encaminhamento</label>
-</div>
-</div>
+            <div class="form-group">
+                <label for="restricoes_medicamentos">Restrições, Cuidados Especiais ou Prescrições:</label>
+                <textarea id="restricoes_medicamentos" placeholder="Informe restrições alimentares, restrições de esforço ou medicamentos prescritos..."></textarea>
+            </div>
 
-<div class="form-group">
-<label for="restricoes_medicamentos">Restrições, Cuidados Especiais ou Prescrições:</label>
-<textarea id="restricoes_medicamentos" placeholder="Informe restrições alimentares, restrições de esforço ou medicamentos prescritos..."></textarea>
-</div>
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label for="nome_medico">Nome do(a) Médico(a) / CRM:</label>
+                    <input type="text" id="nome_medico" placeholder="Nome e CRM do profissional">
+                </div>
+                <div class="col form-group">
+                    <label for="data_parecer">Data da Avaliação Médica:</label>
+                    <input type="date" id="data_parecer">
+                </div>
+            </div>
+        </fieldset>
 
-<div class="row">
-<div class="col-3 form-group">
-<label for="nome_medico">Nome do(a) Médico(a) / CRM:</label>
-<input type="text" id="nome_medico" placeholder="Nome e CRM do profissional">
-</div>
-<div class="col form-group">
-<label for="data_parecer">Data da Avaliação Médica:</label>
-<input type="date" id="data_parecer">
-</div>
-</div>
-</fieldset>
-
-<div class="btn-container">
-<button type="submit">Enviar Pedido / Parecer para o WhatsApp</button>
-</div>
-</form>
+        <div class="btn-container">
+            <button type="submit">Enviar Pedido / Parecer para o WhatsApp</button>
+        </div>
+    </form>
 </div>
 
 <footer>
-<p>© 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
+    <p>&copy; 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
 </footer>
 
 <script>
 function enviarWhatsAppMedico(event) {
-event.preventDefault();
+    event.preventDefault();
 
-// Capturando dados do formulário
-const nome = document.getElementById('nome_assistido').value;
-const dataSol = document.getElementById('data_avaliacao').value || 'Não informada';
-const doc = document.getElementById('documento_assistido').value || 'Não informado';
-const responsavel = document.getElementById('responsavel_triagem').value || 'Não informado';
-const queixas = document.getElementById('queixas_relatadas').value || 'Nenhuma relatada';
-const aptidao = document.querySelector('input[name="aptidao_clinica"]:checked')?.value || 'Não informado';
-const restricoes = document.getElementById('restricoes_medicamentos').value || 'Nenhuma informada';
-const medico = document.getElementById('nome_medico').value || 'Não preenchido';
-const dataParecer = document.getElementById('data_parecer').value || 'Não informada';
+    const nome = document.getElementById('nome_assistido').value;
+    const dataSol = document.getElementById('data_avaliacao').value || 'Não informada';
+    const doc = document.getElementById('documento_assistido').value || 'Não informado';
+    const responsavel = document.getElementById('responsavel_triagem').value || 'Não informado';
+    const queixas = document.getElementById('queixas_relatadas').value || 'Nenhuma relatada';
+    const aptidao = document.querySelector('input[name="aptidao_clinica"]:checked')?.value || 'Não informado';
+    const restricoes = document.getElementById('restricoes_medicamentos').value || 'Nenhuma informada';
+    const medico = document.getElementById('nome_medico').value || 'Não preenchido';
+    const dataParecer = document.getElementById('data_parecer').value || 'Não informada';
 
-// Montando mensagem formatada para o WhatsApp
-let textoMsg = "AMPARO HAZAQ - PEDIDO / PARECER MÉDICO\n\n";
-textoMsg += *1. IDENTIFICAÇÃO*\n;
-textoMsg += • Assistido: ${nome}\n; textoMsg +=• Data Solicitação: ${dataSol}\n;
-textoMsg += • Documento: ${doc}\n; textoMsg +=• Responsável Triagem: ${responsavel}\n\n;
+    let textoMsg = "*AMPARO HAZAQ - PEDIDO / PARECER MÉDICO*\n\n";
+    textoMsg += "*1. IDENTIFICAÇÃO*\n";
+    textoMsg += `• Assistido: ${nome}\n`;
+    textoMsg += `• Data Solicitação: ${dataSol}\n`;
+    textoMsg += `• Documento: ${doc}\n`;
+    textoMsg += `• Responsável Triagem: ${responsavel}\n\n`;
 
-textoMsg += *2. HISTÓRICO / QUEIXAS RELATADAS*\n;
-textoMsg += ${queixas}\n\n`;
+    textoMsg += "*2. HISTÓRICO / QUEIXAS RELATADAS*\n";
+    textoMsg += `${queixas}\n\n`;
 
-textoMsg += *3. PARECER CLÍNICO*\n;
-textoMsg += • Aptidão:${aptidao}\n; textoMsg +=• Restrições/Prescrições: latex
-{restricoes}\n`; textoMsg += `• Médico(a) / CRM: 
+    textoMsg += "*3. PARECER CLÍNICO*\n";
+    textoMsg += `• Aptidão: ${aptidao}\n`;
+    textoMsg += `• Restrições/Prescrições: ${restricoes}\n`;
+    textoMsg += `• Médico(a) / CRM: ${medico}\n`;
+    textoMsg += `• Data do Parecer: ${dataParecer}`;
 
-{medico}\n; textoMsg +=• Data do Parecer: ${dataParecer};
+    const numeroWhats = "5566984666186";
+    const urlFinal = `https://api.whatsapp.com/send?phone=${numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
 
-const numeroWhats = "5566984666186";
-let urlFinal = "";
-
-if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-urlFinal = whatsapp://send?phone=${numeroWhats}&text=latex
-{encodeURIComponent(textoMsg)}`; } else { urlFinal = `https://web.whatsapp.com/send?phone=
-
-{numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
-}
-
-window.location.href = urlFinal;
+    window.location.href = urlFinal;
 }
 </script>
 
