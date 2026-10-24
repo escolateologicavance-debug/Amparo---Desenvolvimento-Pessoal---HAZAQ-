@@ -210,135 +210,128 @@ padding: 20px;
 <body>
 
 <header>
-<div class="logo-container">
-<img src="logo-192.png" alt="Amparo HAZAQ">
-</div>
-<h1>Amparo HAZAQ</h1>
-<p class="subtitle">Programa de Desenvolvimento Pessoal voltado para auxiliar pessoas em estado de vulnerabilidade social. Este pedido de avaliação psicológica tem por finalidade subsidiar a Administração com o status subjetivo e comportamental do(a) ingressante.</p>
+    <div class="logo-container">
+        <img src="logo-192.png" alt="Amparo HAZAQ">
+    </div>
+    <h1>Amparo HAZAQ</h1>
+    <p class="subtitle">Programa de Desenvolvimento Pessoal voltado para auxiliar pessoas em estado de vulnerabilidade social. Este pedido de avaliação psicológica tem por finalidade subsidiar a Administração com o status subjetivo e comportamental do(a) ingressante.</p>
 </header>
 
 <div class="container">
-<form id="formPedidoPsicologico" onsubmit="enviarWhatsAppPsicologico(event)">
+    <form id="formPedidoPsicologico" onsubmit="enviarWhatsAppPsicologico(event)">
 
-<!-- BLOCO 1: IDENTIFICAÇÃO DO INGRESSANTE -->
-<fieldset>
-<legend>1. Identificação do(a) Ingressante</legend>
-<div class="row">
-<div class="col-3 form-group">
-<label for="nome_assistido">Nome Completo (ou alcunha):</label>
-<input type="text" id="nome_assistido" placeholder="Digite o nome completo" required>
-</div>
-<div class="col form-group">
-<label for="data_avaliacao">Data da Solicitação:</label>
-<input type="date" id="data_avaliacao" required>
-</div>
-</div>
-<div class="row">
-<div class="col form-group">
-<label for="documento_assistido">Documento (RG/CPF se houver):</label>
-<input type="text" id="documento_assistido" placeholder="Documentação disponível">
-</div>
-<div class="col form-group">
-<label for="responsavel_triagem">Avaliador / Responsável:</label>
-<input type="text" id="responsavel_triagem" placeholder="Nome do responsável">
-</div>
-</div>
-</fieldset>
+        <!-- BLOCO 1: IDENTIFICAÇÃO DO INGRESSANTE -->
+        <fieldset>
+            <legend>1. Identificação do(a) Ingressante</legend>
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label for="nome_assistido">Nome Completo (ou alcunha):</label>
+                    <input type="text" id="nome_assistido" placeholder="Digite o nome completo" required>
+                </div>
+                <div class="col form-group">
+                    <label for="data_avaliacao">Data da Solicitação:</label>
+                    <input type="date" id="data_avaliacao" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col form-group">
+                    <label for="documento_assistido">Documento (RG/CPF se houver):</label>
+                    <input type="text" id="documento_assistido" placeholder="Documentação disponível">
+                </div>
+                <div class="col form-group">
+                    <label for="responsavel_triagem">Avaliador / Responsável:</label>
+                    <input type="text" id="responsavel_triagem" placeholder="Nome do responsável">
+                </div>
+            </div>
+        </fieldset>
 
-<!-- BLOCO 2: REQUISIÇÃO DE AVALIAÇÃO PSICANALÍTICA -->
-<fieldset>
-<legend>2. Requisição de Parecer Psicanalítico / Comportamental</legend>
-<p style="font-size: 0.95rem; text-align: justify; margin-bottom: 20px; color: #475569;">
-Solicitamos ao(à) Psicanalista Clínico(a) a devida avaliação do(a) paciente acima citado(a), visando atestar sua estabilidade emocional, capacidade de assimilação dos pilares de recuperação e o levantamento de eventuais demandas psíquicas ou traços de vulnerabilidade comportamental.
-</p>
+        <!-- BLOCO 2: REQUISIÇÃO DE AVALIAÇÃO PSICANALÍTICA -->
+        <fieldset>
+            <legend>2. Requisição de Parecer Psicanalítico / Comportamental</legend>
+            <p style="font-size: 0.95rem; text-align: justify; margin-bottom: 20px; color: #475569;">
+                Solicitamos ao(à) Psicanalista Clínico(a) a devida avaliação do(a) paciente acima citado(a), visando atestar sua estabilidade emocional, capacidade de assimilação dos pilares de recuperação e o levantamento de eventuais demandas psíquicas ou traços de vulnerabilidade comportamental.
+            </p>
 
-<div class="form-group">
-<label for="demandas_relatadas">Demandas Emocionais ou Comportamentais Relatadas na Triagem:</label>
-<textarea id="demandas_relatadas" placeholder="Descreva episódios de ansiedade, compulsões, traumas, histórico de adicção ou sintomas psíquicos observados..."></textarea>
-</div>
-</fieldset>
+            <div class="form-group">
+                <label for="demandas_relatadas">Demandas Emocionais ou Comportamentais Relatadas na Triagem:</label>
+                <textarea id="demandas_relatadas" placeholder="Descreva episódios de ansiedade, compulsões, traumas, histórico de adicção ou sintomas psíquicos observados..."></textarea>
+            </div>
+        </fieldset>
 
-<!-- BLOCO 3: PARECER DO PROFISSIONAL DE SAÚDE MENTAL -->
-<fieldset>
-<legend>3. Parecer e Conclusão Psicanalítica (Preenchimento do Profissional)</legend>
+        <!-- BLOCO 3: PARECER DO PROFISSIONAL DE SAÚDE MENTAL -->
+        <fieldset>
+            <legend>3. Parecer e Conclusão Psicanalítica (Preenchimento do Profissional)</legend>
+            
+            <div class="form-group">
+                <label>O(A) paciente apresenta condições psíquicas para integração no programa?</label>
+                <div class="radio-checkbox-group">
+                    <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto" required> Apto(a) para acolhimento e atividades</label>
+                    <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto com Acompanhamento"> Apto(a) com acompanhamento psicanalítico contínuo</label>
+                    <label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Inapto Temporário"> Inapto(a) temporariamente / Necessita suporte intensivo</label>
+                </div>
+            </div>
 
-<div class="form-group">
-<label>O(A) paciente apresenta condições psíquicas para integração no programa?</label>
-<div class="radio-checkbox-group">
-<label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto" required> Apto(a) para acolhimento e atividades</label>
-<label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Apto com Acompanhamento"> Apto(a) com acompanhamento psicanalítico contínuo</label>
-<label class="radio-item"><input type="radio" name="aptidao_psiquica" value="Inapto Temporário"> Inapto(a) temporariamente / Necessita suporte intensivo</label>
-</div>
-</div>
+            <div class="form-group">
+                <label for="observacoes_psicanaliticas">Diretrizes de Suporte Emocional ou Recomendações:</label>
+                <textarea id="observacoes_psicanaliticas" placeholder="Informe focos de atenção terapêutica, recomendações para a equipe de apoio ou observações específicas..."></textarea>
+            </div>
 
-<div class="form-group">
-<label for="observacoes_psicanaliticas">Diretrizes de Suporte Emocional ou Recomendações:</label>
-<textarea id="observacoes_psicanaliticas" placeholder="Informe focos de atenção terapêutica, recomendações para a equipe de apoio ou observações específicas..."></textarea>
-</div>
+            <div class="row">
+                <div class="col-3 form-group">
+                    <label for="nome_psicanalista">Nome do(a) Psicanalista Clínico(a) / Registro:</label>
+                    <input type="text" id="nome_psicanalista" placeholder="Nome e registro profissional (CBO / Ordem)">
+                </div>
+                <div class="col form-group">
+                    <label for="data_parecer">Data da Avaliação Psicológica:</label>
+                    <input type="date" id="data_parecer">
+                </div>
+            </div>
+        </fieldset>
 
-<div class="row">
-<div class="col-3 form-group">
-<label for="nome_psicanalista">Nome do(a) Psicanalista Clínico(a) / Registro:</label>
-<input type="text" id="nome_psicanalista" placeholder="Nome e registro profissional (CBO / Ordem)">
-</div>
-<div class="col form-group">
-<label for="data_parecer">Data da Avaliação Psicológica:</label>
-<input type="date" id="data_parecer">
-</div>
-</div>
-</fieldset>
-
-<div class="btn-container">
-<button type="submit">Enviar Pedido / Parecer para o WhatsApp</button>
-</div>
-</form>
+        <div class="btn-container">
+            <button type="submit">Enviar Pedido / Parecer para o WhatsApp</button>
+        </div>
+    </form>
 </div>
 
 <footer>
-<p>© 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
+    <p>&copy; 2026 Amparo HAZAQ. Todos os direitos reservados.</p>
 </footer>
 
 <script>
 function enviarWhatsAppPsicologico(event) {
-event.preventDefault();
+    event.preventDefault();
 
-// Capturando dados do formulário
-const nome = document.getElementById('nome_assistido').value;
-const dataSol = document.getElementById('data_avaliacao').value || 'Não informada';
-const doc = document.getElementById('documento_assistido').value || 'Não informado';
-const responsavel = document.getElementById('responsavel_triagem').value || 'Não informado';
-const demandas = document.getElementById('demandas_relatadas').value || 'Nenhuma relatada';
-const aptidao = document.querySelector('input[name="aptidao_psiquica"]:checked')?.value || 'Não informado';
-const observacoes = document.getElementById('observacoes_psicanaliticas').value || 'Nenhuma informada';
-const psicanalista = document.getElementById('nome_psicanalista').value || 'Não preenchido';
-const dataParecer = document.getElementById('data_parecer').value || 'Não informada';
+    const nome = document.getElementById('nome_assistido').value;
+    const dataSol = document.getElementById('data_avaliacao').value || 'Não informada';
+    const doc = document.getElementById('documento_assistido').value || 'Não informado';
+    const responsavel = document.getElementById('responsavel_triagem').value || 'Não informado';
+    const demandas = document.getElementById('demandas_relatadas').value || 'Nenhuma relatada';
+    const aptidao = document.querySelector('input[name="aptidao_psiquica"]:checked')?.value || 'Não informado';
+    const observacoes = document.getElementById('observacoes_psicanaliticas').value || 'Nenhuma informada';
+    const psicanalista = document.getElementById('nome_psicanalista').value || 'Não preenchido';
+    const dataParecer = document.getElementById('data_parecer').value || 'Não informada';
 
-// Montando mensagem formatada para o WhatsApp
-let textoMsg = "AMPARO HAZAQ - PEDIDO / PARECER PSICOLÓGICO\n\n";
-textoMsg += *1. IDENTIFICAÇÃO*\n;
-textoMsg += • Assistido: ${nome}\n; textoMsg +=• Data Solicitação: ${dataSol}\n;
-textoMsg += • Documento: ${doc}\n; textoMsg +=• Responsável Triagem: ${responsavel}\n\n;
+    let textoMsg = "*AMPARO HAZAQ - PEDIDO / PARECER PSICOLÓGICO*\n\n";
+    textoMsg += "*1. IDENTIFICAÇÃO*\n";
+    textoMsg += `• Assistido: ${nome}\n`;
+    textoMsg += `• Data Solicitação: ${dataSol}\n`;
+    textoMsg += `• Documento: ${doc}\n`;
+    textoMsg += `• Responsável Triagem: ${responsavel}\n\n`;
 
-textoMsg += *2. HISTÓRICO / DEMANDAS RELATADAS*\n;
-textoMsg += ${demandas}\n\n`;
+    textoMsg += "*2. HISTÓRICO / DEMANDAS RELATADAS*\n";
+    textoMsg += `${demandas}\n\n`;
 
-textoMsg += *3. PARECER PSICANALÍTICO*\n;
-textoMsg += • Aptidão Psíquica:${aptidao}\n; textoMsg +=• Diretrizes / Recomendações: latex
-{observacoes}\n`; textoMsg += `• Psicanalista Clínico(a): 
+    textoMsg += "*3. PARECER PSICANALÍTICO*\n";
+    textoMsg += `• Aptidão Psíquica: ${aptidao}\n`;
+    textoMsg += `• Diretrizes / Recomendações: ${observacoes}\n`;
+    textoMsg += `• Psicanalista Clínico(a): ${psicanalista}\n`;
+    textoMsg += `• Data do Parecer: ${dataParecer}`;
 
-{psicanalista}\n; textoMsg +=• Data do Parecer: ${dataParecer};
+    const numeroWhats = "5566984666186";
+    const urlFinal = `https://api.whatsapp.com/send?phone=${numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
 
-const numeroWhats = "5566984666186";
-let urlFinal = "";
-
-if (/Android|iPhone|iPad/i.test(navigator.userAgent)) {
-urlFinal = whatsapp://send?phone=${numeroWhats}&text=latex
-{encodeURIComponent(textoMsg)}`; } else { urlFinal = `https://web.whatsapp.com/send?phone=
-
-{numeroWhats}&text=${encodeURIComponent(textoMsg)}`;
-}
-
-window.location.href = urlFinal;
+    window.location.href = urlFinal;
 }
 </script>
 
