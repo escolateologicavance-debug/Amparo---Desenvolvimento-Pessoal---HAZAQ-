@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Recibo - Amparo HAZAQ</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@media print {
+@page { size: landscape; margin: 10mm; }
+.no-print { display: none !important; }
+body { background: white; color: black; }
+.print-border { border: 2px solid #000 !important; box-shadow: none !important; }
+}
+</style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex items-center justify-center p-4 font-sans">
+
+<!-- CARD EM FORMATO PAISAGEM -->
+<div class="max-w-4xl w-full bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-2xl print-border">
+
+<!-- CABEÇALHO COM LOGO EM LARGURA TOTAL -->
+<div class="flex flex-col items-center border-b border-slate-800 pb-4 mb-4 text-center">
+<img src="logo-512.png" alt="Logo Amparo HAZAQ" class="w-full max-h-24 mb-2 object-contain" onerror="this.src='https://via.placeholder.com/600x100?text=AMPARO+HAZAQ'">
+<h1 class="text-xl font-black tracking-wider text-white uppercase">AMPARO HAZAQ</h1>
+<p class="text-xs text-blue-400 font-semibold tracking-widest uppercase">Suporte Emocional e Comportamental Psicobíblico</p>
+<div class="mt-1 text-[11px] text-slate-400">
+<span>escolateologicavance@gmail.com</span> | <span>(66) 98466-6186</span> | <span>Itanhangá-MT-BR</span>
+</div>
+</div>
+
+<!-- TÍTULO DO RECIBO -->
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-base font-bold text-amber-400 uppercase tracking-wide">Recibo de Contribuição</h2>
+<span class="text-xs text-slate-400 font-mono">Nº <input type="text" placeholder="0001" class="bg-transparent border-b border-slate-700 w-16 text-center text-slate-200 focus:outline-none"></span>
+</div>
+
+<!-- FORMULÁRIO EM DUAS COLUNAS (PAISAGEM) -->
+<form id="reciboForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+<!-- COLUNA DA ESQUERDA: DADOS PRINCIPAIS -->
+<div class="space-y-3">
+<div>
+<label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Recebemos de (Contribuinte):</label>
+<input type="text" id="nomeContribuinte" placeholder="Nome Completo" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+<div>
+<label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Valor (R$`):</label>
+<input type="text" id="valorContrib" placeholder="0,00" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-emerald-400 font-bold focus:outline-none focus:border-blue-500">
+</div>
+<div>
+<label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Data:</label>
+<input type="date" id="dataContrib" required class="w-full bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500">
+</div>
+</div>
+
+<!-- CAMPO EXPLICÍTO DE WHATSAPP DO CONTRIBUINTE -->
+<div class="no-print">
+<label class="block text-xs font-semibold text-amber-400 uppercase mb-1">📱 Número do WhatsApp para Envio (com DDD):</label>
+<input type="tel" id="whatsappContribuinte" placeholder="Ex: 66984666186" class="w-full bg-slate-900 border border-amber-600/50 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-400">
+</div>
+</div>
+
+<!-- COLUNA DA DIREITA: MODALIDADES -->
+<div class="space-y-3 flex flex-col justify-between">
+<div>
+<label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Modalidade da Contribuição:</label>
+
+<div class="space-y-2 text-xs">
+<div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex items-center space-x-4">
+<label class="flex items-center space-x-2 text-slate-200 cursor-pointer">
+<input type="radio" name="modalidade" value="Mensalidade" class="text-blue-600">
+<span>Mensalidade</span>
+</label>
+<label class="flex items-center space-x-2 text-slate-200 cursor-pointer">
+<input type="radio" name="modalidade" value="Anuidade" class="text-blue-600">
+<span>Anuidade</span>
+</label>
+</div>
+
+<div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 space-y-1.5">
+<label class="flex items-center space-x-2 text-slate-200 cursor-pointer">
+<input type="radio" name="modalidade" value="Bolsa" class="text-blue-600">
+<span>Bolsa</span>
+</label>
+<input type="text" id="investidorBolsa" placeholder="Nome do Investidor / Padrinho" class="w-full bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 focus:outline-none">
+</div>
+
+<div class="bg-slate-900/60 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between">
+<label class="flex items-center space-x-2 text-slate-200 cursor-pointer">
+<input type="radio" name="modalidade" value="Bolsa-Presente" class="text-blue-600">
+<span>Bolsa-Presente</span>
+</label>
+<span class="text-[10px] font-bold text-amber-400 bg-amber-950/60 border border-amber-800/60 px-2 py-0.5 rounded">Investidor: HAZAQ</span>
+</div>
+</div>
+</div>
+
+<!-- ASSINATURA -->
+<div class="pt-2 text-center">
+<div class="border-t border-slate-700 w-3/4 mx-auto pt-1">
+<p class="text-[11px] font-semibold text-slate-300">Tesouraria / Administração Amparo HAZAQ</p>
+</div>
+</div>
+</div>
+
+</form>
+
+<!-- BOTÕES DE AÇÃO -->
+<div class="no-print grid grid-cols-3 gap-3 pt-4 border-t border-slate-800 mt-4">
+<button type="button" onclick="enviarWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2 rounded-lg text-xs transition flex items-center justify-center gap-1">
+📲 Enviar WhatsApp
+</button>
+<button type="button" onclick="window.print()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 rounded-lg text-xs transition flex items-center justify-center gap-1">
+🖨️ Imprimir / PDF
+</button>
+<a href="index.html" class="text-center bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold py-2 rounded-lg text-xs transition flex items-center justify-center">
+⬅️ Voltar ao Menu
+</a>
+</div>
+
+</div>
+
+<script>
+document.getElementById('dataContrib').valueAsDate = new Date();
+
+function enviarWhatsApp() {
+const nome = document.getElementById('nomeContribuinte').value.trim();
+const valor = document.getElementById('valorContrib').value.trim();
+const data = document.getElementById('dataContrib').value;
+const whatsapp = document.getElementById('whatsappContribuinte').value.replace(/\D/g, '');
+
+const radioModalidades = document.getElementsByName('modalidade');
+let modalidadeSelecionada = "Não especificada";
+for (const radio of radioModalidades) {
+if (radio.checked) {
+modalidadeSelecionada = radio.value;
+break;
+}
+}
+
+let investidorInfo = "";
+if (modalidadeSelecionada === "Bolsa") {
+const investidor = document.getElementById('investidorBolsa').value.trim();
+if (investidor) investidorInfo = (Investidor:${investidor})`;
+} else if (modalidadeSelecionada === "Bolsa-Presente") {
+investidorInfo = " (Investidor: HAZAQ)";
+}
+
+if (!nome || !valor) {
+alert("Por favor, preencha o Nome do Contribuinte e o Valor.");
+return;
+}
+
+if (!whatsapp) {
+alert("Por favor, digite o número do WhatsApp do contribuinte no campo destacado.");
+document.getElementById('whatsappContribuinte').focus();
+return;
+}
+
+const mensagem = *RECIBO DE CONTRIBUIÇÃO - AMPARO HAZAQ*%0A +
+----------------------------------------%0A +
+*Recebemos de:* ${nome}%0A+Valor: R$ ${valor}%0A+Data:${data.split('-').reverse().join('/')}%0A +
+*Modalidade:* ${modalidadeSelecionada}${investidorInfo}%0A +
+----------------------------------------%0A +
+*Amparo HAZAQ* - Suporte Emocional e Comportamental Psicobíblico%0A +
+escolateologicavance@gmail.com | (66) 98466-6186 | Itanhangá-MT-BR;
+
+// Disparo direto e funcional para o número informado
+window.open(https://api.whatsapp.com/send?phone=55${whatsapp}&text=${mensagem}, '_blank');
+}
+</script>
+</body>
+</html>
